@@ -1,0 +1,25 @@
+[
+  {
+    "id": "demo-user-1",
+    "name": "Ahmed Khan",
+    "phone": "+923331112233",
+    "locale": "ur-PK",
+    "preferred_language": "roman_urdu",
+    "loyalty_tier": "gold",
+    "loyalty_discount_pct": 5,
+    "preferences": ["verified", "urdu_speaking", "premium"],
+    "default_location": "G-13 Islamabad",
+    "coords": { "lat": 33.6844, "lng": 73.0479 }
+  },
+  {
+    "id": "demo-user-2",
+    "name": "Fatima Ali",
+    "phone": "+923449998877",
+    "locale": "ur-PK",
+    "preferred_language": "urdu",
+    "loyalty_tier": "silver",
+    "loyalty_discount_pct": 2,
+    "preferences": ["female_provider", "budget_friendly"],
+    "default_location": "F-7 Islamabad"
+  }
+]

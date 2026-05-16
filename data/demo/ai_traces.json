@@ -1,0 +1,615 @@
+[
+  {
+    "trace_id": "TRC-44b6b2deff6f",
+    "user_id": "demo-user-1",
+    "message": "Mujhe kal morning AC service chahiye G-13",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:27:19.682075",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 41
+        },
+        "message": "Language: Mixed"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:27:19.682283",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:27:19.685970",
+        "action": "fallback",
+        "confidence": 0.85,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:27:19.686671",
+        "action": "extract_intent",
+        "confidence": 0.85,
+        "details": {
+          "raw_message": "Mujhe kal morning AC service chahiye G-13",
+          "detected_language": "mixed",
+          "service_type": "ac",
+          "service_category": "ac",
+          "urgency": "high",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.85,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: ac, Urgency: high, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 16:27:19.686923",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 16:27:19.690324",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-ac-001"
+        },
+        "message": "Provider Hassan AC Experts selected: score 102%, ac specialization, ETA 11 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 16:27:19.690837",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2528.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,528 \u2014 urgency: +12%"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 16:27:19.692808",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T10:00:00",
+          "buffer_minutes": 41,
+          "alternates": []
+        },
+        "message": "Slot 10:00 AM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 16:27:19.696020",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-FCD8577B"
+        },
+        "message": "Booking BK-FCD8577B confirmed with Hassan AC Experts"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 16:27:19.696157",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-FCD8577B: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 16:27:19.696236",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-ac-001",
+          "delta": 0
+        },
+        "message": "Provider Hassan AC Experts trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 16:27:19.696339",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-466ea12ab35b",
+    "user_id": "demo-user-1",
+    "message": "Plumber geyser leak G-13 kal subah",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:30:57.171495",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 34
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:30:57.171533",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:30:57.171656",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:30:57.171795",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Plumber geyser leak G-13 kal subah",
+          "detected_language": "roman_urdu",
+          "service_type": "plumber",
+          "service_category": "plumber",
+          "urgency": "medium",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: plumber, Urgency: medium, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 16:30:57.171844",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 16:30:57.172331",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-plumb-001"
+        },
+        "message": "Provider Geyser Master Imran selected: score 89%, plumber specialization, ETA 10 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 16:30:57.172474",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2196.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,196 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 16:30:57.172607",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T10:00:00",
+          "buffer_minutes": 40,
+          "alternates": []
+        },
+        "message": "Slot 10:00 AM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 16:30:57.174287",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-3F5C7D6A"
+        },
+        "message": "Booking BK-3F5C7D6A confirmed with Geyser Master Imran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 16:30:57.174382",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-3F5C7D6A: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 16:30:57.174409",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-plumb-001",
+          "delta": 0
+        },
+        "message": "Provider Geyser Master Imran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 16:30:57.174444",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-bedba5a0f661",
+    "user_id": "demo-user-1",
+    "message": "Cheap electrician near G-13",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:31:06.227897",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 27
+        },
+        "message": "Language: English"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:31:06.228218",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:31:06.228458",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Cheap electrician near G-13",
+          "detected_language": "english",
+          "service_type": "electrician",
+          "service_category": "electrician",
+          "urgency": "low",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "high",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: electrician, Urgency: low, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 16:31:06.228580",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.30000000000000004,
+          "flags": [
+            "safety_sensitive_service"
+          ]
+        },
+        "message": "Risk score: 30% \u2014 flags: safety_sensitive_service"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 16:31:06.229374",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-elec-001"
+        },
+        "message": "Provider Waqas Electric Works selected: score 97%, electrician specialization, ETA 23 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 16:31:06.229853",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1832.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,832 \u2014 urgency: +-5%"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 16:31:06.230192",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-16T18:00:00",
+          "buffer_minutes": 53,
+          "alternates": []
+        },
+        "message": "Slot 06:00 PM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 16:31:06.233546",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-AE9111C9"
+        },
+        "message": "Booking BK-AE9111C9 confirmed with Waqas Electric Works"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 16:31:06.233771",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-AE9111C9: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 16:31:06.233852",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-elec-001",
+          "delta": 0
+        },
+        "message": "Provider Waqas Electric Works trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 16:31:06.233942",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-95a43b3d1cf8",
+    "user_id": "demo-user-1",
+    "message": "Cheap electrician near G-13",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 16:31:08.277593",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 27
+        },
+        "message": "Language: English"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:31:08.277712",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 16:31:08.277806",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Cheap electrician near G-13",
+          "detected_language": "english",
+          "service_type": "electrician",
+          "service_category": "electrician",
+          "urgency": "low",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "high",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: electrician, Urgency: low, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 16:31:08.277850",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.30000000000000004,
+          "flags": [
+            "safety_sensitive_service"
+          ]
+        },
+        "message": "Risk score: 30% \u2014 flags: safety_sensitive_service"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 16:31:08.278242",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-elec-001"
+        },
+        "message": "Provider Waqas Electric Works selected: score 97%, electrician specialization, ETA 23 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 16:31:08.278361",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1832.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,832 \u2014 urgency: +-5%"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 16:31:08.278858",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-16T19:30:00",
+          "buffer_minutes": 53,
+          "alternates": [
+            {
+              "start": "2026-05-16T19:30:00",
+              "end": "2026-05-16T21:30:00"
+            },
+            {
+              "start": "2026-05-16T21:00:00",
+              "end": "2026-05-16T23:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 07:30 PM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 16:31:08.280838",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-C3A5184F"
+        },
+        "message": "Booking BK-C3A5184F confirmed with Waqas Electric Works"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 16:31:08.280893",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-C3A5184F: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 16:31:08.280915",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-elec-001",
+          "delta": 0
+        },
+        "message": "Provider Waqas Electric Works trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 16:31:08.280945",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  }
+]

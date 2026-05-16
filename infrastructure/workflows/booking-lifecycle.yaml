@@ -1,0 +1,41 @@
+# Google Cloud Workflow — Booking Lifecycle
+main:
+  params: [event]
+  steps:
+    - init:
+        assign:
+          - bookingId: ${event.booking_id}
+          - status: ${event.status}
+    - route_status:
+        switch:
+          - condition: ${status == "confirmed"}
+            next: send_confirmation
+          - condition: ${status == "provider_cancelled"}
+            next: auto_reschedule
+          - condition: ${status == "completed"}
+            next: post_service
+        next: end
+    - send_confirmation:
+        call: http.post
+        args:
+          url: ${sys.get_env("API_URL") + "/api/v1/internal/notify"}
+          body:
+            booking_id: ${bookingId}
+            template: confirmation
+        next: end
+    - auto_reschedule:
+        call: http.post
+        args:
+          url: ${sys.get_env("API_URL") + "/api/v1/internal/reschedule"}
+          body:
+            booking_id: ${bookingId}
+        next: end
+    - post_service:
+        call: http.post
+        args:
+          url: ${sys.get_env("API_URL") + "/api/v1/internal/invoice"}
+          body:
+            booking_id: ${bookingId}
+        next: end
+    - end:
+        return: ${bookingId}

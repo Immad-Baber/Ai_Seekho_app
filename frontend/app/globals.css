@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0e17;
+  --card: rgba(26, 35, 50, 0.72);
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #339dff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface-900 text-white antialiased min-h-screen;
+  background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(51, 157, 255, 0.15), transparent);
+}
+
+.glass {
+  @apply backdrop-blur-xl border border-white/10;
+  background: var(--card);
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-brand-300 via-brand-400 to-cyan-300 bg-clip-text text-transparent;
+}
+
+.safe-bottom {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-600/50 rounded-full;
+}

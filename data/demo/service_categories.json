@@ -1,0 +1,12 @@
+[
+  { "id": "ac", "name": "AC & Cooling", "default_complexity": "intermediate", "base_rate": 2500 },
+  { "id": "electrician", "name": "Electrician", "default_complexity": "intermediate", "base_rate": 1800 },
+  { "id": "plumber", "name": "Plumber", "default_complexity": "basic", "base_rate": 2000 },
+  { "id": "beautician", "name": "Beautician", "default_complexity": "basic", "base_rate": 3000 },
+  { "id": "tutor", "name": "Tutor", "default_complexity": "basic", "base_rate": 1500 },
+  { "id": "mechanic", "name": "Mechanic", "default_complexity": "intermediate", "base_rate": 2200 },
+  { "id": "driver", "name": "Driver", "default_complexity": "basic", "base_rate": 1200 },
+  { "id": "cleaning", "name": "Cleaning", "default_complexity": "basic", "base_rate": 1600 },
+  { "id": "appliance", "name": "Appliance Repair", "default_complexity": "intermediate", "base_rate": 2300 },
+  { "id": "home_repair", "name": "Home Repair", "default_complexity": "basic", "base_rate": 1900 }
+]
