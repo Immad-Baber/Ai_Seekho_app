@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getUser, logout, type AuthUser } from "@/lib/auth";
+import { getUser, logout, getUserBookings, getUserFeedback, type AuthUser } from "@/lib/auth";
 import {
   User, Phone, CreditCard, MapPin, Star, CalendarCheck,
   Bell, Shield, HelpCircle, LogOut, ChevronRight, Package,
@@ -34,11 +34,22 @@ function InfoRow({ icon: Icon, label, value }: { icon: React.ElementType; label:
 export default function UserProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [bookingCount, setBookingCount] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [avgRating, setAvgRating] = useState<string>("—");
 
   useEffect(() => {
     const u = getUser();
     if (!u || u.role !== "user") { router.push("/select-role"); return; }
     setUser(u);
+    const bookings = getUserBookings(u.phone);
+    const feedback = getUserFeedback(u.phone);
+    setBookingCount(bookings.length);
+    setReviewCount(feedback.length);
+    if (feedback.length > 0) {
+      const avg = feedback.reduce((s, f) => s + f.rating, 0) / feedback.length;
+      setAvgRating(avg.toFixed(1) + "★");
+    }
   }, [router]);
 
   if (!user) return null;
@@ -75,7 +86,11 @@ export default function UserProfilePage() {
 
         {/* Stats */}
         <div className="mt-5 grid grid-cols-3 divide-x divide-stone-100 rounded-2xl bg-stone-50 text-center">
-          {[["0", "Bookings"], ["0", "Reviews"], ["—", "Avg. Rating"]].map(([val, lbl]) => (
+          {[
+            [String(bookingCount), "Bookings"],
+            [String(reviewCount), "Reviews"],
+            [avgRating, "Avg. Rating"],
+          ].map(([val, lbl]) => (
             <div key={lbl} className="py-3">
               <p className="text-lg font-bold text-ink">{val}</p>
               <p className="text-[10px] font-semibold text-ink-muted">{lbl}</p>

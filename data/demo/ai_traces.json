@@ -7108,5 +7108,816 @@
       }
     ],
     "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-da8301640b66",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:17:55.865565",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:17:55.865565",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:17:55.867669",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:17:55.867669",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:17:55.867669",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:17:55.885887",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:17:55.885887",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:17:55.905033",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:17:55.909090",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-20800C08"
+        },
+        "message": "Booking BK-20800C08 confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:17:55.910105",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-20800C08: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:17:55.910105",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:17:55.910105",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-e35508b623b6",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:17:59.035822",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:17:59.035822",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:17:59.035822",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:17:59.036371",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:17:59.036371",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:17:59.036371",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:17:59.036371",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:17:59.036371",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:17:59.043736",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-1D03B84B"
+        },
+        "message": "Booking BK-1D03B84B confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:17:59.044324",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-1D03B84B: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:17:59.044324",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:17:59.044324",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-5465e98a3f65",
+    "user_id": "demo-user-1",
+    "message": "Kal subah airport drop ke liye driver chahiye",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:37.586823",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 45
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:37.588356",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:37.589213",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:37.589213",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Kal subah airport drop ke liye driver chahiye",
+          "detected_language": "roman_urdu",
+          "service_type": "driver",
+          "service_category": "driver",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: driver, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:23:37.590311",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:23:37.595935",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-driver-001"
+        },
+        "message": "Provider SafeRide Kamran selected: score 104%, driver specialization, ETA 13 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:23:37.595935",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1450.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,450 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:23:37.595935",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T10:00:00",
+          "buffer_minutes": 43,
+          "alternates": []
+        },
+        "message": "Slot 10:00 AM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:23:37.603323",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-CD80BEAF"
+        },
+        "message": "Booking BK-CD80BEAF confirmed with SafeRide Kamran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:23:37.603323",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-CD80BEAF: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:23:37.603323",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-driver-001",
+          "delta": 0
+        },
+        "message": "Provider SafeRide Kamran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:23:37.603323",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-70489af11b78",
+    "user_id": "demo-user-1",
+    "message": "Kal subah airport drop ke liye driver chahiye",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 45
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Kal subah airport drop ke liye driver chahiye",
+          "detected_language": "roman_urdu",
+          "service_type": "driver",
+          "service_category": "driver",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: driver, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-driver-001"
+        },
+        "message": "Provider SafeRide Kamran selected: score 104%, driver specialization, ETA 13 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:23:39.723973",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1450.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,450 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:23:39.724969",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T11:30:00",
+          "buffer_minutes": 43,
+          "alternates": [
+            {
+              "start": "2026-05-17T11:30:00",
+              "end": "2026-05-17T13:30:00"
+            },
+            {
+              "start": "2026-05-17T13:00:00",
+              "end": "2026-05-17T15:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 11:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:23:39.728539",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-E88E5933"
+        },
+        "message": "Booking BK-E88E5933 confirmed with SafeRide Kamran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:23:39.728539",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-E88E5933: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:23:39.729537",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-driver-001",
+          "delta": 0
+        },
+        "message": "Provider SafeRide Kamran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:23:39.729537",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-a2712a0b5372",
+    "user_id": "demo-user-1",
+    "message": "Kal subah airport drop ke liye driver chahiye",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 45
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Kal subah airport drop ke liye driver chahiye",
+          "detected_language": "roman_urdu",
+          "service_type": "driver",
+          "service_category": "driver",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: driver, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:23:52.828373",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-driver-001"
+        },
+        "message": "Provider SafeRide Kamran selected: score 104%, driver specialization, ETA 13 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:23:52.829411",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1450.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,450 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:23:52.829411",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T11:30:00",
+          "buffer_minutes": 43,
+          "alternates": [
+            {
+              "start": "2026-05-17T11:30:00",
+              "end": "2026-05-17T13:30:00"
+            },
+            {
+              "start": "2026-05-17T13:00:00",
+              "end": "2026-05-17T15:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 11:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:23:52.833894",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-11E6D81E"
+        },
+        "message": "Booking BK-11E6D81E confirmed with SafeRide Kamran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:23:52.833894",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-11E6D81E: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:23:52.833894",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-driver-001",
+          "delta": 0
+        },
+        "message": "Provider SafeRide Kamran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:23:52.833894",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
   }
 ]
