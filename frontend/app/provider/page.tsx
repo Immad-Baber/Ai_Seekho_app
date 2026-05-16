@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 const LINKS = [
-  { href: "/provider/jobs",         icon: Briefcase,    label: "Naye kaam",    desc: "Requests accept karein" },
+  { href: "/provider/jobs",         icon: Briefcase,    label: "Meri Jobs",     desc: "AI-assigned kaam" },
   { href: "/provider/calendar",     icon: Calendar,     label: "Calendar",     desc: "Schedule dekhein" },
   { href: "/provider/earnings",     icon: DollarSign,   label: "Kamai",        desc: "Weekly earnings" },
   { href: "/provider/reputation",   icon: Star,         label: "Reputation",   desc: "Rating & trust" },
@@ -55,7 +55,7 @@ export default function ProviderDashboard() {
       <div className="mb-5 rounded-3xl bg-gradient-to-br from-accent-600 to-amber-700 p-5 text-white shadow-lg">
         <p className="text-accent-100 text-sm font-medium">{user.domain || "Service Professional"}</p>
         <h2 className="font-display text-2xl font-bold mt-0.5">{user.name}</h2>
-        <p className="mt-1 text-xs text-accent-100">AI-powered job matching · Antigravity Platform</p>
+        <p className="mt-1 text-xs text-accent-100">AI-autonomous matching · Antigravity Platform</p>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           {[["3", "Aaj ke kaam"], ["4.8", "Rating"], ["91%", "On-time"]].map(([val, lbl]) => (
             <div key={lbl} className="rounded-2xl bg-white/15 py-2.5">

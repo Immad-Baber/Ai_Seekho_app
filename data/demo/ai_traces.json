@@ -7919,5 +7919,661 @@
       }
     ],
     "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-9d5c97215e89",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:29:23.433456",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:29:23.433456",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:29:23.433456",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:29:23.433456",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:29:23.433456",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:29:23.435160",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:29:23.435160",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:29:23.436636",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:29:23.441738",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-6D5772BC"
+        },
+        "message": "Booking BK-6D5772BC confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:29:23.441738",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-6D5772BC: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:29:23.441738",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:29:23.441738",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-0fbe2c8ef260",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:29:27.657404",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:29:27.658401",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:29:27.666070",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-18D40F03"
+        },
+        "message": "Booking BK-18D40F03 confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:29:27.667070",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-18D40F03: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:29:27.667070",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:29:27.667070",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-652ab4072c00",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:34:55.434330",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:34:55.434330",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:34:55.435858",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:34:55.435858",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:34:55.437184",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:34:55.439271",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:34:55.443324",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:34:55.444382",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:34:55.460546",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-30341531"
+        },
+        "message": "Booking BK-30341531 confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:34:55.460546",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-30341531: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:34:55.460546",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:34:55.460546",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-4db03ddcd3de",
+    "user_id": "demo-user-1",
+    "message": "Class 8 ke liye math tutor chahiye I-8 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Class 8 ke liye math tutor chahiye I-8 mein",
+          "detected_language": "roman_urdu",
+          "service_type": "tutor",
+          "service_category": "tutor",
+          "urgency": "medium",
+          "location_text": "I-8",
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: tutor, Urgency: medium, Location: I-8"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-tutor-001"
+        },
+        "message": "Provider Dr. Ayesha Tutoring selected: score 100%, tutor specialization, ETA 21 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 1903.0,
+          "surge": false
+        },
+        "message": "Total PKR 1,903 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-16 21:34:58.713125",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-17T00:30:00",
+          "buffer_minutes": 51,
+          "alternates": [
+            {
+              "start": "2026-05-17T00:30:00",
+              "end": "2026-05-17T02:30:00"
+            },
+            {
+              "start": "2026-05-17T02:00:00",
+              "end": "2026-05-17T04:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 12:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-16 21:34:58.716192",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-C3CF9054"
+        },
+        "message": "Booking BK-C3CF9054 confirmed with Dr. Ayesha Tutoring"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-16 21:34:58.717204",
+        "action": "notify",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push",
+            "WhatsApp template (simulated)",
+            "SMS reminder scheduled"
+          ],
+          "reminder_times": [
+            "-24h",
+            "-1h",
+            "en_route"
+          ]
+        },
+        "message": "Reminders queued for BK-C3CF9054: FCM push, WhatsApp template (simulated), SMS reminder scheduled"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-16 21:34:58.717204",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-tutor-001",
+          "delta": 0
+        },
+        "message": "Provider Dr. Ayesha Tutoring trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-16 21:34:58.717204",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
   }
 ]
