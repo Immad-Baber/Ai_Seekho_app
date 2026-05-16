@@ -26,7 +26,7 @@ export default function DisputePage() {
 
   return (
     <main className="p-4">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
+      <Link href="/" className="inline-flex items-center gap-1 text-sm text-ink-muted mb-4">
         <ArrowLeft size={16} /> Back
       </Link>
       <h1 className="text-xl font-bold mb-4">Complaint / Dispute</h1>
@@ -55,7 +55,7 @@ export default function DisputePage() {
           <p>Resolution: {(result as { resolution: string }).resolution}</p>
           <p>Compensation: PKR {(result as { compensation: number }).compensation}</p>
           {(result as { escalated: boolean }).escalated && (
-            <p className="text-amber-400">Escalated to admin</p>
+            <p className="text-amber-500">Escalated to admin</p>
           )}
         </div>
       )}

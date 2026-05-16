@@ -1,10 +1,10 @@
 {
-  "name": "ServiceFlow AI",
-  "short_name": "ServiceFlow",
-  "description": "AI Service Orchestrator",
+  "name": "Ustaad PK",
+  "short_name": "Ustaad PK",
+  "description": "Apna kaam, sahi ustaad — Pakistan ka smart service app",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0e17",
-  "theme_color": "#339dff",
+  "background_color": "#fff9f5",
+  "theme_color": "#059669",
   "icons": []
 }

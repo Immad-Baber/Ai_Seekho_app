@@ -13,48 +13,58 @@ import {
 } from "lucide-react";
 
 const LINKS = [
-  { href: "/provider/jobs", icon: Briefcase, label: "Job Requests" },
-  { href: "/provider/calendar", icon: Calendar, label: "Schedule" },
-  { href: "/provider/earnings", icon: DollarSign, label: "Earnings" },
-  { href: "/provider/reputation", icon: Star, label: "Reputation" },
-  { href: "/provider/cancellations", icon: TrendingDown, label: "Cancellations" },
-  { href: "/provider/availability", icon: Clock, label: "Availability" },
-  { href: "/provider/routes", icon: Map, label: "Route Optimization" },
+  { href: "/provider/jobs", icon: Briefcase, label: "Naye kaam", desc: "Requests accept karein" },
+  { href: "/provider/calendar", icon: Calendar, label: "Calendar", desc: "Schedule dekhein" },
+  { href: "/provider/earnings", icon: DollarSign, label: "Kamai", desc: "Weekly earnings" },
+  { href: "/provider/reputation", icon: Star, label: "Reputation", desc: "Rating & trust" },
+  { href: "/provider/cancellations", icon: TrendingDown, label: "Cancellations", desc: "Track record" },
+  { href: "/provider/availability", icon: Clock, label: "Availability", desc: "Online / offline" },
+  { href: "/provider/routes", icon: Map, label: "Routes", desc: "Optimized stops" },
 ];
 
 export default function ProviderDashboard() {
   return (
     <main className="p-4">
-      <h1 className="text-xl font-bold mb-1">Provider Dashboard</h1>
-      <p className="text-sm text-white/50 mb-6">Hassan AC Experts</p>
-
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <StatCard label="Today's jobs" value="3" />
-        <StatCard label="Earnings" value="PKR 12.4k" />
-        <StatCard label="Rating" value="4.8" />
-        <StatCard label="On-time" value="91%" />
+      <div className="card-elevated mb-6 bg-gradient-to-br from-brand-600 to-brand-800 p-5 text-white">
+        <p className="text-brand-100 text-sm">Provider operations</p>
+        <h1 className="font-display text-2xl font-bold mt-1">Multi-service network</h1>
+        <p className="mt-1 text-xs text-brand-100">AC, plumber, electrician, driver, safai, beauty, tutor, mechanic</p>
+        <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+          <div>
+            <p className="text-2xl font-bold">3</p>
+            <p className="text-[10px] text-brand-100">Aaj ke kaam</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold">4.8</p>
+            <p className="text-[10px] text-brand-100">Rating</p>
+          </div>
+          <div>
+            <p className="text-2xl font-bold">91%</p>
+            <p className="text-[10px] text-brand-100">On-time</p>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-2">
-        {LINKS.map(({ href, icon: Icon, label }) => (
-          <Link key={href} href={href} className="flex items-center justify-between glass rounded-xl p-4">
+        {LINKS.map(({ href, icon: Icon, label, desc }) => (
+          <Link
+            key={href}
+            href={href}
+            className="card flex items-center justify-between p-4 hover:shadow-card-hover"
+          >
             <span className="flex items-center gap-3">
-              <Icon size={20} className="text-brand-400" />
-              {label}
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-100 text-brand-700">
+                <Icon size={20} />
+              </span>
+              <span>
+                <span className="font-semibold text-ink block">{label}</span>
+                <span className="text-xs text-ink-muted">{desc}</span>
+              </span>
             </span>
-            <ChevronRight size={16} className="text-white/30" />
+            <ChevronRight size={18} className="text-ink-faint" />
           </Link>
         ))}
       </div>
     </main>
-  );
-}
-
-function StatCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="glass rounded-xl p-3">
-      <p className="text-xs text-white/50">{label}</p>
-      <p className="text-lg font-bold gradient-text">{value}</p>
-    </div>
   );
 }

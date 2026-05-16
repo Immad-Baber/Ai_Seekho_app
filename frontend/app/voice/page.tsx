@@ -2,9 +2,10 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
-import { ArrowLeft, Mic, MicOff } from "lucide-react";
+import { Mic, MicOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { orchestrate } from "@/lib/api";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function VoicePage() {
   const [listening, setListening] = useState(false);
@@ -15,11 +16,10 @@ export default function VoicePage() {
 
   function startListening() {
     setError("");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const win = window as any;
     const SR = win.webkitSpeechRecognition || win.SpeechRecognition;
     if (!SR) {
-      setError("Speech recognition not supported. Use Chrome or type in chat.");
+      setError("Voice is browser mein supported nahi. Chrome try karein ya type karein.");
       return;
     }
     const rec = new SR() as {
@@ -35,7 +35,7 @@ export default function VoicePage() {
     rec.lang = "ur-PK";
     rec.continuous = false;
     rec.interimResults = true;
-    rec.onresult = (e: { results: Iterable<{ 0: { transcript: string } }> }) => {
+    rec.onresult = (e) => {
       const text = Array.from(e.results)
         .map((r) => r[0].transcript)
         .join("");
@@ -44,7 +44,7 @@ export default function VoicePage() {
     rec.onend = () => setListening(false);
     rec.onerror = () => {
       setListening(false);
-      setError("Could not capture audio — try again or use chat.");
+      setError("Sun nahi paye — dubara try karein.");
     };
     recognitionRef.current = rec;
     rec.start();
@@ -63,47 +63,49 @@ export default function VoicePage() {
       sessionStorage.setItem("lastOrchestration", JSON.stringify(res));
       router.push("/summary");
     } catch {
-      setError("API unavailable");
+      setError("Server connect nahi ho raha.");
     }
   }
 
   return (
-    <main className="p-4 flex flex-col min-h-[80vh]">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-white/60 mb-8">
-        <ArrowLeft size={16} /> Back
-      </Link>
-      <h1 className="text-xl font-bold text-center mb-2">Voice Input</h1>
-      <p className="text-center text-sm text-white/50 mb-8">Urdu / Roman Urdu · Google Speech-to-Text ready</p>
+    <main className="flex min-h-[85vh] flex-col p-4">
+      <PageHeader title="Bol kar batao" subtitle="Urdu ya Roman Urdu mein" />
 
-      <div className="flex-1 flex flex-col items-center justify-center">
+      <div className="flex flex-1 flex-col items-center justify-center py-8">
         <button
+          type="button"
           onClick={listening ? stopListening : startListening}
-          className={`w-32 h-32 rounded-full flex items-center justify-center transition ${
+          className={`flex h-36 w-36 items-center justify-center rounded-full transition ${
             listening
-              ? "bg-red-500/30 border-2 border-red-400 animate-pulse"
-              : "bg-brand-600/30 border-2 border-brand-400"
+              ? "bg-red-100 text-red-600 ring-4 ring-red-200 animate-pulse"
+              : "bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-xl shadow-brand-600/30"
           }`}
         >
-          {listening ? <MicOff size={48} /> : <Mic size={48} />}
+          {listening ? <MicOff size={52} /> : <Mic size={52} />}
         </button>
-        <p className="mt-6 text-sm text-white/60">{listening ? "Listening…" : "Tap to speak"}</p>
+        <p className="mt-6 text-center text-sm font-medium text-ink-muted">
+          {listening ? "Sun rahe hain..." : "Mic dabayein aur boliye"}
+        </p>
       </div>
 
       {transcript && (
-        <div className="glass rounded-xl p-4 mb-4">
-          <p className="text-sm text-white/50 mb-1">Transcript</p>
-          <p>{transcript}</p>
+        <div className="card mb-4 p-4">
+          <p className="text-xs font-semibold text-ink-muted mb-1">Aap ne kaha:</p>
+          <p className="text-ink">{transcript}</p>
         </div>
       )}
 
-      {error && <p className="text-red-400 text-sm text-center mb-4">{error}</p>}
+      {error && (
+        <div className="mb-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+      )}
 
       <button
+        type="button"
         onClick={submitVoice}
         disabled={!transcript.trim()}
-        className="w-full py-3 rounded-xl bg-brand-600 disabled:opacity-40 font-medium"
+        className="btn-primary w-full"
       >
-        Process with AI
+        Ustaad dhundo
       </button>
     </main>
   );

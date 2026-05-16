@@ -6,11 +6,11 @@ import { ArrowLeft } from "lucide-react";
 export default function ProviderRoutes() {
   return (
     <main className="p-4">
-      <Link href="/provider" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
+      <Link href="/provider" className="inline-flex items-center gap-1 text-sm text-ink-muted mb-4">
         <ArrowLeft size={16} /> Back
       </Link>
       <h1 className="text-xl font-bold mb-4">Route Optimization</h1>
-      <div className="glass rounded-2xl p-4 h-48 flex items-center justify-center text-white/40 text-sm">
+      <div className="glass rounded-2xl p-4 h-48 flex items-center justify-center text-ink-faint text-sm">
         Google Maps optimized route (3 stops)
       </div>
       <ol className="mt-4 space-y-2 text-sm">

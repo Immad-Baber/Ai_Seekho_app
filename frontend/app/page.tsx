@@ -2,35 +2,41 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Mic, Send, Sparkles, ChevronRight } from "lucide-react";
+import { Mic, Send, ChevronRight, MapPin, Shield, Clock, Sparkles } from "lucide-react";
 import { orchestrate, runDemo, type OrchestrationResult } from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
+import { BrandLogo } from "@/components/BrandLogo";
+import { ServiceCategories } from "@/components/ServiceCategories";
 
 const QUICK = [
-  "Mujhe kal morning AC service chahiye G-13",
-  "Geyser leak kar raha urgent",
-  "Cheap electrician near G-13",
-  "Machine pani leak kr rhi",
+  { text: "Mujhe kal subah AC service chahiye G-13", label: "AC" },
+  { text: "Geyser leak ho raha hai urgent plumber chahiye", label: "Pani" },
+  { text: "Sasta electrician chahiye paas mein", label: "Bijli" },
+  { text: "Kal subah airport drop ke liye driver chahiye", label: "Drive" },
+  { text: "Ghar ki safaii aur deep cleaning chahiye", label: "Safai" },
+  { text: "Home beautician chahiye kal shaam facial ke liye", label: "Beauty" },
+  { text: "Class 8 ke liye math tutor chahiye I-8 mein", label: "Tutor" },
+  { text: "Car engine check ke liye mechanic chahiye", label: "Gari" },
+  { text: "Washing machine pani leak kar rahi hai", label: "Machine" },
 ];
 
-const DEMOS = [
-  { id: "ac-repair", label: "AC repair" },
-  { id: "ambiguous-input", label: "Ambiguous input" },
-  { id: "schedule-conflict", label: "Schedule conflict" },
-  { id: "price-dispute", label: "Price dispute" },
-  { id: "no-provider", label: "No provider" },
-  { id: "provider-cancel", label: "Provider cancel" },
+const TRUST = [
+  { icon: Shield, text: "Verified ustaad" },
+  { icon: Clock, text: "On-time guarantee" },
+  { icon: MapPin, text: "Apke area mein" },
 ];
 
-export default function ChatHome() {
+export default function HomePage() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<OrchestrationResult | null>(null);
   const [error, setError] = useState("");
+  const [showDemos, setShowDemos] = useState(false);
 
   async function submit(text?: string) {
     const msg = text || message;
     if (!msg.trim()) return;
+    setMessage(msg);
     setLoading(true);
     setError("");
     try {
@@ -38,159 +44,204 @@ export default function ChatHome() {
       setResult(res);
       sessionStorage.setItem("lastOrchestration", JSON.stringify(res));
     } catch {
-      setError("API unavailable. Start backend: cd backend && uvicorn app.main:app --port 8080");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function demo(id: string) {
-    setLoading(true);
-    setError("");
-    try {
-      const res = await runDemo(id);
-      setResult(res);
-      sessionStorage.setItem("lastOrchestration", JSON.stringify(res));
-    } catch {
-      setError("Demo failed — ensure API is running.");
+      setError("Server se connect nahi ho raha. Backend start karein (port 8080).");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <main className="flex flex-col min-h-screen p-4">
-      <header className="mb-6">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-cyan-400 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold gradient-text">ServiceFlow AI</h1>
-            <p className="text-xs text-white/50">Antigravity Orchestrator · Urdu/English</p>
-          </div>
+    <main className="flex min-h-screen flex-col px-4 pt-5 pb-6">
+      <header className="mb-5">
+        <BrandLogo size="md" showTagline />
+        <div className="mt-4 flex flex-wrap gap-2">
+          {TRUST.map(({ icon: Icon, text }) => (
+            <span
+              key={text}
+              className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-medium text-brand-800"
+            >
+              <Icon size={12} />
+              {text}
+            </span>
+          ))}
         </div>
       </header>
 
-      <section className="glass rounded-2xl p-4 mb-4">
-        <p className="text-sm text-white/70 mb-3">
-          Describe your service need in any language — Roman Urdu, Urdu, or English.
-        </p>
-        <div className="flex gap-2">
+      <section className="card-elevated mb-5 overflow-hidden p-0">
+        <div className="bg-gradient-to-r from-brand-600 to-brand-700 px-4 py-3 text-white">
+          <p className="text-sm font-semibold">Kya kaam karwana hai?</p>
+          <p className="text-xs text-brand-100">Urdu, Roman Urdu ya English — jo marzi likhein</p>
+        </div>
+        <div className="p-4">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Mujhe kal morning AC service chahiye..."
-            className="flex-1 bg-surface-800 rounded-xl px-3 py-2 text-sm resize-none h-20 border border-white/10 focus:border-brand-500 outline-none"
+            placeholder="Masalan: Kal subah G-13 mein plumber, electrician ya safai service chahiye..."
+            className="input-field min-h-[88px] resize-none text-base"
+            rows={3}
           />
+          <div className="mt-3 flex gap-2">
+            <Link href="/voice" className="btn-secondary flex-1 py-2.5">
+              <Mic size={18} />
+              Bol kar batao
+            </Link>
+            <button onClick={() => submit()} disabled={loading} className="btn-primary flex-[1.4] py-2.5">
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <Sparkles size={18} className="animate-pulse" />
+                  Dhundh rahe hain...
+                </span>
+              ) : (
+                <>
+                  <Send size={18} />
+                  Ustaad dhundo
+                </>
+              )}
+            </button>
+          </div>
         </div>
-        <motion.div className="flex gap-2 mt-3">
-          <Link
-            href="/voice"
-            className="flex items-center gap-1 px-3 py-2 rounded-xl bg-surface-700 text-sm"
-          >
-            <Mic size={16} /> Voice
-          </Link>
-          <button
-            onClick={() => submit()}
-            disabled={loading}
-            className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 disabled:opacity-50 font-medium text-sm"
-          >
-            {loading ? "Orchestrating..." : <><Send size={16} /> Orchestrate</>}
-          </button>
-        </motion.div>
       </section>
 
-      <div className="flex flex-wrap gap-2 mb-4">
-        {QUICK.map((q) => (
-          <button
-            key={q}
-            onClick={() => {
-              setMessage(q);
-              submit(q);
-            }}
-            className="text-xs px-3 py-1.5 rounded-full bg-surface-700/80 border border-white/10 hover:border-brand-500/50"
-          >
-            {q.slice(0, 28)}…
-          </button>
-        ))}
-      </div>
+      <section className="mb-5">
+        <p className="section-title mb-3">Service choose karein</p>
+        <ServiceCategories onSelect={(p) => submit(p)} />
+      </section>
 
-      <p className="text-xs text-white/40 mb-2">Demo workflows</p>
-      <div className="grid grid-cols-2 gap-2 mb-6">
-        {DEMOS.map((d) => (
-          <button
-            key={d.id}
-            onClick={() => demo(d.id)}
-            disabled={loading}
-            className="text-left text-xs glass rounded-xl p-3 hover:border-brand-500/30 border border-transparent"
-          >
-            {d.label}
-          </button>
-        ))}
-      </div>
+      <section className="mb-5">
+        <p className="section-title mb-2">Jaldi examples</p>
+        <div className="flex flex-col gap-2">
+          {QUICK.map(({ text, label }) => (
+            <button
+              key={text}
+              type="button"
+              onClick={() => submit(text)}
+              disabled={loading}
+              className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]"
+            >
+              <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">
+                {label}
+              </span>
+              <span className="flex-1 text-sm font-medium text-ink leading-snug">{text}</span>
+              <ChevronRight size={16} className="shrink-0 text-ink-faint" />
+            </button>
+          ))}
+        </div>
+      </section>
 
-      {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
+      <button
+        type="button"
+        onClick={() => setShowDemos(!showDemos)}
+        className="text-xs font-medium text-ink-faint underline mb-2"
+      >
+        {showDemos ? "Demo hide karein" : "Demo scenarios (testing)"}
+      </button>
+      {showDemos && (
+        <div className="mb-4 grid grid-cols-2 gap-2">
+          {[
+            "ac-repair",
+            "plumber-urgent",
+            "electrician-wiring",
+            "beautician-home",
+            "tutor-math",
+            "mechanic-car",
+            "driver-airport",
+            "cleaning-safai",
+            "appliance-repair",
+            "home-repair",
+            "ambiguous-input",
+            "schedule-conflict",
+            "no-provider",
+          ].map((id) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => runDemo(id).then((r) => {
+                setResult(r);
+                sessionStorage.setItem("lastOrchestration", JSON.stringify(r));
+              })}
+              className="chip justify-center text-[10px]"
+            >
+              {id}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
 
       <AnimatePresence>
         {result && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
+          <motion.section
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-3"
+            className="space-y-3 animate-fade-up"
           >
-            <div className="glass rounded-2xl p-4">
-              <p className="text-xs text-brand-300 mb-1">Intent · {result.intent.detected_language}</p>
-              <p className="font-medium">{result.intent.service_type || "—"} · {result.intent.urgency}</p>
-              <p className="text-sm text-white/60 mt-1">
-                Confidence {Math.round(result.intent.confidence * 100)}%
-                {result.intent.location_text && ` · ${result.intent.location_text}`}
+            <div className="card border-l-4 border-l-brand-500 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">
+                Samajh aa gaya · {result.intent.detected_language}
+              </p>
+              <p className="mt-1 text-lg font-bold text-ink capitalize">
+                {result.intent.service_type || "Service"} · {result.intent.urgency}
+              </p>
+              <p className="mt-1 text-sm text-ink-muted">
+                {result.intent.location_text && (
+                  <>
+                    <MapPin size={14} className="inline mr-0.5 -mt-0.5" />
+                    {result.intent.location_text} ·{" "}
+                  </>
+                )}
+                {Math.round(result.intent.confidence * 100)}% sure
               </p>
               {result.intent.needs_clarification && (
-                <ul className="mt-2 text-sm text-amber-300/90 list-disc pl-4">
+                <ul className="mt-3 space-y-1 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
                   {result.intent.clarification_questions.map((q, i) => (
-                    <li key={i}>{q}</li>
+                    <li key={i}>• {q}</li>
                   ))}
                 </ul>
               )}
             </div>
 
             {result.selected_provider && (
-              <div className="glass rounded-2xl p-4 border border-brand-500/30">
-                <p className="text-xs text-white/50">Selected provider</p>
-                <p className="font-semibold text-lg">{result.selected_provider.name}</p>
-                <p className="text-sm text-brand-300">
-                  Score {(result.selected_provider.total_score * 100).toFixed(0)}%
-                </p>
+              <div className="card-elevated border-2 border-brand-200 bg-brand-50/50 p-4">
+                <p className="text-xs font-semibold text-brand-700">Aapka ustaad</p>
+                <p className="text-xl font-bold text-ink">{result.selected_provider.name}</p>
+                <div className="mt-2 flex flex-wrap gap-2 text-sm">
+                  <span className="rounded-full bg-white px-2.5 py-0.5 font-medium text-brand-800">
+                    ★ {(result.selected_provider.total_score * 100).toFixed(0)}% match
+                  </span>
+                  {result.pricing && (
+                    <span className="rounded-full bg-accent-100 px-2.5 py-0.5 font-bold text-accent-800">
+                      PKR {result.pricing.total.toLocaleString()}
+                    </span>
+                  )}
+                </div>
               </div>
-            )}
-
-            {result.pricing && (
-              <p className="text-sm glass rounded-xl px-4 py-2">
-                Total <span className="font-bold text-brand-300">PKR {result.pricing.total.toLocaleString()}</span>
-              </p>
             )}
 
             <div className="grid grid-cols-2 gap-2">
               {[
-                { href: "/summary", label: "Summary" },
-                { href: "/providers", label: "Providers" },
-                { href: "/reasoning", label: "AI Reasoning" },
-                { href: "/pricing", label: "Pricing" },
-                { href: "/confirm", label: "Confirm" },
-                { href: "/tracking", label: "Live Track" },
+                { href: "/summary", label: "Details", sub: "Poora summary" },
+                { href: "/providers", label: "Ustaad", sub: "Sab options" },
+                { href: "/pricing", label: "Qeemat", sub: "Breakdown" },
+                { href: "/confirm", label: "Confirm", sub: "Book karein" },
+                { href: "/reasoning", label: "AI samjhao", sub: "Kyun ye ustaad?" },
+                { href: "/tracking", label: "Track", sub: "Live status" },
               ].map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center justify-between glass rounded-xl px-3 py-2 text-sm"
+                  className="card flex flex-col p-3 transition hover:border-brand-300 hover:shadow-card-hover"
                 >
-                  {link.label}
-                  <ChevronRight size={14} className="text-white/40" />
+                  <span className="font-semibold text-ink">{link.label}</span>
+                  <span className="text-[11px] text-ink-muted">{link.sub}</span>
                 </Link>
               ))}
             </div>
-          </motion.div>
+          </motion.section>
         )}
       </AnimatePresence>
     </main>

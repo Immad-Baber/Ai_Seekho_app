@@ -7,16 +7,16 @@ from typing import Any, Optional
 from app.config import get_settings
 
 SERVICE_KEYWORDS = {
-    "ac": ["ac", "air condition", "cooling", "split", "gas refill"],
-    "electrician": ["electric", "wiring", "breaker", "light", "bijli"],
-    "plumber": ["plumb", "pipe", "leak", "geyser", "pani", "drain", "tap"],
-    "beautician": ["beauty", "facial", "hair", "makeup", "salon"],
-    "tutor": ["tutor", "study", "math", "english", "coaching"],
-    "mechanic": ["car", "bike", "engine", "mechanic", "garage"],
-    "driver": ["driver", "chauffeur", "ride", "pick"],
-    "cleaning": ["clean", "safai", "maid", "dust"],
-    "appliance": ["washing", "machine", "fridge", "microwave", "repair"],
-    "home_repair": ["door", "lock", "paint", "furniture", "carpenter"],
+    "ac": ["ac", "a/c", "air condition", "aircondition", "cooling", "split", "gas refill", "compressor", "hvac"],
+    "electrician": ["electric", "electrician", "wiring", "breaker", "light", "bijli", "switch", "fan", "ups", "fuse", "meter"],
+    "plumber": ["plumb", "plumber", "pipe", "leak", "geyser", "pani", "drain", "tap", "nalka", "seepage", "flush", "toilet"],
+    "beautician": ["beauty", "beautician", "facial", "hair", "makeup", "salon", "mehndi", "waxing", "bridal"],
+    "tutor": ["tutor", "teacher", "study", "math", "english", "coaching", "tuition", "quran", "ustani", "home tutor"],
+    "mechanic": ["car", "bike", "engine", "mechanic", "garage", "puncture", "battery", "oil change", "gari", "gaari"],
+    "driver": ["driver", "chauffeur", "ride", "pickup", "pick", "drop", "airport", "school van", "school pickup", "sawari"],
+    "cleaning": ["clean", "cleaning", "safai", "safaii", "safaiii", "safaai", "safayi", "maid", "dust", "jharo", "jharoo", "pocha", "deep clean"],
+    "appliance": ["washing", "machine", "fridge", "microwave", "oven", "repair", "appliance"],
+    "home_repair": ["door", "lock", "paint", "furniture", "carpenter", "mistri", "handyman", "tiles"],
 }
 
 URGENCY_KEYWORDS = {
@@ -56,7 +56,7 @@ class GeminiClient:
         urdu_script = bool(re.search(r"[\u0600-\u06FF]", text))
         roman_urdu = bool(
             re.search(
-                r"\b(mujhe|chahiye|kar|raha|hai|kal|subah|geyser|sasta|paas)\b",
+                r"\b(mujhe|chahiye|kar|raha|hai|kal|subah|geyser|sasta|paas|safai|bijli|pani|ustaad)\b",
                 text,
                 re.I,
             )
@@ -89,7 +89,11 @@ class GeminiClient:
                 break
 
         location = None
-        loc_match = re.search(r"\b(G-\d+|Sector [A-Z]-\d+|DHA|Bahria|F-\d+)\b", message, re.I)
+        loc_match = re.search(
+            r"\b(G-\d+|F-\d+|I-\d+|E-\d+|Sector [A-Z]-\d+|DHA|Bahria|Gulberg|Blue Area|Saddar|Satellite Town)\b",
+            message,
+            re.I,
+        )
         if loc_match:
             location = loc_match.group(1)
         elif "near" in lower:
@@ -111,9 +115,9 @@ class GeminiClient:
             budget = "high"
 
         complexity = "basic"
-        if any(w in lower for w in ["complex", "multiple", "replace", "install new"]):
+        if any(w in lower for w in ["complex", "multiple", "replace", "install new", "renovation", "full day", "rewiring"]):
             complexity = "complex"
-        elif any(w in lower for w in ["leak", "not cooling", "wiring"]):
+        elif any(w in lower for w in ["leak", "not cooling", "wiring", "gas refill", "deep clean", "airport", "facial", "engine", "geyser"]):
             complexity = "intermediate"
 
         confidence = 0.75

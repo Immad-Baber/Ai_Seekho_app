@@ -10,21 +10,21 @@ export default function FeedbackPage() {
 
   return (
     <main className="p-4">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
+      <Link href="/" className="inline-flex items-center gap-1 text-sm text-ink-muted mb-4">
         <ArrowLeft size={16} /> Back
       </Link>
       <h1 className="text-xl font-bold mb-4">Feedback & Rating</h1>
       {submitted ? (
-        <p className="text-green-400">Thank you! Reputation agent updated provider score.</p>
+        <p className="text-green-600">Thank you! Reputation agent updated provider score.</p>
       ) : (
         <>
-          <p className="text-sm text-white/60 mb-4">Rate your service experience</p>
+          <p className="text-sm text-ink-muted mb-4">Rate your service experience</p>
           <div className="flex gap-2 justify-center mb-6">
             {[1, 2, 3, 4, 5].map((n) => (
               <button key={n} onClick={() => setRating(n)}>
                 <Star
                   size={36}
-                  className={n <= rating ? "text-amber-400 fill-amber-400" : "text-white/20"}
+                  className={n <= rating ? "text-amber-500 fill-amber-400" : "text-stone-300"}
                 />
               </button>
             ))}

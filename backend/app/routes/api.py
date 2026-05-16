@@ -87,6 +87,42 @@ async def run_demo(scenario: DemoScenario):
             "Mujhe kal morning AC service chahiye G-13 mein, gas refill bhi ho sakta hai",
             None,
         ),
+        DemoScenario.plumber_urgent: (
+            "Geyser leak ho raha hai, aaj G-13 mein plumber chahiye budget kam hai",
+            None,
+        ),
+        DemoScenario.electrician_wiring: (
+            "Sasta electrician chahiye F-8 mein fan aur wiring ke liye",
+            None,
+        ),
+        DemoScenario.beautician_home: (
+            "Home beautician chahiye kal shaam facial aur makeup ke liye Bahria mein",
+            None,
+        ),
+        DemoScenario.tutor_math: (
+            "Class 8 ke liye female math tutor chahiye I-8 mein weekly",
+            None,
+        ),
+        DemoScenario.mechanic_car: (
+            "Car engine check aur battery issue ke liye mechanic chahiye Saddar mein",
+            None,
+        ),
+        DemoScenario.driver_airport: (
+            "Kal subah airport drop ke liye reliable driver chahiye F-7 se",
+            None,
+        ),
+        DemoScenario.cleaning_safai: (
+            "Ghar ki safaii aur deep cleaning chahiye Sunday ko Bahria mein",
+            None,
+        ),
+        DemoScenario.appliance_repair: (
+            "Washing machine pani leak kar rahi hai G-11 mein repair chahiye",
+            None,
+        ),
+        DemoScenario.home_repair: (
+            "Door lock aur furniture repair ke liye mistri chahiye Gulberg mein",
+            None,
+        ),
         DemoScenario.ambiguous_input: (
             "machine theek nahi",
             None,

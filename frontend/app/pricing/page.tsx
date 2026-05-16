@@ -9,12 +9,12 @@ export default function PricingPage() {
   const p = data?.pricing;
   return (
     <main className="p-4">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
+      <Link href="/" className="inline-flex items-center gap-1 text-sm text-ink-muted mb-4">
         <ArrowLeft size={16} /> Back
       </Link>
       <h1 className="text-xl font-bold mb-4">Pricing Breakdown</h1>
       {!p ? (
-        <p className="text-white/60 text-sm">No pricing data.</p>
+        <p className="text-ink-muted text-sm">No pricing data.</p>
       ) : (
         <>
           <div className="glass rounded-2xl p-4 space-y-2">
@@ -22,12 +22,12 @@ export default function PricingPage() {
               <div key={i} className="flex justify-between text-sm py-2 border-b border-white/5">
                 <div>
                   <p>{item.label}</p>
-                  {item.description && <p className="text-xs text-white/40">{item.description}</p>}
+                  {item.description && <p className="text-xs text-ink-faint">{item.description}</p>}
                   {item.multiplier && (
-                    <p className="text-xs text-brand-300">×{item.multiplier}</p>
+                    <p className="text-xs text-brand-700">×{item.multiplier}</p>
                   )}
                 </div>
-                <span className={item.amount < 0 ? "text-green-400" : ""}>
+                <span className={item.amount < 0 ? "text-green-600" : ""}>
                   {item.amount < 0 ? "" : "+"}PKR {Math.abs(item.amount).toLocaleString()}
                 </span>
               </div>
@@ -36,7 +36,7 @@ export default function PricingPage() {
               <span>Total</span>
               <span className="gradient-text">PKR {p.total.toLocaleString()}</span>
             </div>
-            {p.surge_applied && <p className="text-xs text-amber-400">Peak demand surge applied</p>}
+            {p.surge_applied && <p className="text-xs text-amber-500">Peak demand surge applied</p>}
           </div>
         </>
       )}

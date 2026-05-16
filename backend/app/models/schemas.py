@@ -151,6 +151,15 @@ class DisputeResolution(BaseModel):
 
 class DemoScenario(str, Enum):
     ac_repair = "ac-repair"
+    plumber_urgent = "plumber-urgent"
+    electrician_wiring = "electrician-wiring"
+    beautician_home = "beautician-home"
+    tutor_math = "tutor-math"
+    mechanic_car = "mechanic-car"
+    driver_airport = "driver-airport"
+    cleaning_safai = "cleaning-safai"
+    appliance_repair = "appliance-repair"
+    home_repair = "home-repair"
     provider_cancel = "provider-cancel"
     ambiguous_input = "ambiguous-input"
     price_dispute = "price-dispute"

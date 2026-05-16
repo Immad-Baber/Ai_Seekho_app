@@ -6,14 +6,20 @@ export function AgentTrace({ traces }: { traces: OrchestrationResult["traces"] }
   return (
     <div className="space-y-3">
       {traces.map((t, i) => (
-        <div key={i} className="glass rounded-xl p-3 border-l-2 border-brand-500">
+        <div
+          key={i}
+          className="card border-l-4 border-l-brand-500 p-3 animate-fade-up"
+          style={{ animationDelay: `${i * 50}ms` }}
+        >
           <div className="flex justify-between items-start gap-2">
-            <span className="text-xs font-semibold text-brand-300">[{t.agent}]</span>
+            <span className="text-xs font-bold text-brand-700">{t.agent}</span>
             {t.confidence != null && (
-              <span className="text-xs text-white/50">{Math.round(t.confidence * 100)}%</span>
+              <span className="rounded-full bg-brand-100 px-2 py-0.5 text-[10px] font-semibold text-brand-800">
+                {Math.round(t.confidence * 100)}%
+              </span>
             )}
           </div>
-          <p className="text-sm text-white/90 mt-1">{t.message}</p>
+          <p className="text-sm text-ink mt-1.5 leading-relaxed">{t.message}</p>
         </div>
       ))}
     </div>

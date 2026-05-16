@@ -106,6 +106,15 @@ Use the **Demo** panel in the app or call `POST /api/v1/demo/{scenario}`:
 | Scenario | Endpoint | Description |
 |----------|----------|-------------|
 | AC repair booking | `ac-repair` | Full orchestration flow |
+| Plumber urgent | `plumber-urgent` | Leak/geyser request with budget sensitivity |
+| Electrician wiring | `electrician-wiring` | Wiring/fan matching and pricing |
+| Beautician at home | `beautician-home` | Home salon scheduling |
+| Tutor | `tutor-math` | Preference-aware tutor matching |
+| Mechanic | `mechanic-car` | Vehicle issue classification |
+| Driver | `driver-airport` | Time-sensitive airport drop |
+| Safai / cleaning | `cleaning-safai` | Deep-clean workload and team matching |
+| Appliance repair | `appliance-repair` | Washing machine repair |
+| Home repair | `home-repair` | Mistri/carpenter/lock repair |
 | Provider cancellation | `provider-cancel` | Auto-reschedule + notify |
 | Ambiguous input | `ambiguous-input` | Clarification questions |
 | Price dispute | `price-dispute` | Dispute agent + compensation |

@@ -8,7 +8,7 @@ export default function ProviderAvailability() {
   const [on, setOn] = useState(true);
   return (
     <main className="p-4">
-      <Link href="/provider" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
+      <Link href="/provider" className="inline-flex items-center gap-1 text-sm text-ink-muted mb-4">
         <ArrowLeft size={16} /> Back
       </Link>
       <h1 className="text-xl font-bold mb-4">Availability</h1>
@@ -18,7 +18,7 @@ export default function ProviderAvailability() {
       >
         {on ? "Available now ✓" : "Unavailable"}
       </button>
-      <p className="text-sm text-white/50 mt-4">Max daily jobs: 6 · Current: 2</p>
+      <p className="text-sm text-ink-muted mt-4">Max daily jobs: 6 · Current: 2</p>
     </main>
   );
 }

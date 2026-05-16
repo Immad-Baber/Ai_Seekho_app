@@ -187,6 +187,75 @@
     }
   },
   {
+    "id": "prov-driver-001",
+    "name": "SafeRide Kamran",
+    "specializations": ["driver"],
+    "lat": 33.6944,
+    "lng": 73.0479,
+    "hourly_rate": 1300,
+    "experience_years": 11,
+    "available_now": true,
+    "max_daily_jobs": 5,
+    "active": true,
+    "tags": ["verified", "airport", "urdu_speaking"],
+    "metrics": {
+      "rating": 4.8,
+      "reliability_score": 0.94,
+      "cancellation_rate": 0.03,
+      "on_time_score": 0.96,
+      "risk_score": 0.05,
+      "completion_rate": 0.97,
+      "current_jobs": 1,
+      "days_since_last_review": 4
+    }
+  },
+  {
+    "id": "prov-driver-002",
+    "name": "Budget Driver Nadeem",
+    "specializations": ["driver"],
+    "lat": 33.6711,
+    "lng": 73.0333,
+    "hourly_rate": 950,
+    "experience_years": 5,
+    "available_now": true,
+    "max_daily_jobs": 7,
+    "active": true,
+    "tags": ["budget_friendly"],
+    "metrics": {
+      "rating": 4.2,
+      "reliability_score": 0.76,
+      "cancellation_rate": 0.17,
+      "on_time_score": 0.74,
+      "risk_score": 0.2,
+      "completion_rate": 0.87,
+      "current_jobs": 5,
+      "days_since_last_review": 38
+    }
+  },
+  {
+    "id": "prov-home-001",
+    "name": "FixIt Mistri Team",
+    "specializations": ["home_repair"],
+    "lat": 33.7066,
+    "lng": 73.0492,
+    "hourly_rate": 2100,
+    "experience_years": 14,
+    "available_now": true,
+    "max_daily_jobs": 4,
+    "active": true,
+    "tags": ["verified", "carpenter", "painter"],
+    "metrics": {
+      "rating": 4.7,
+      "reliability_score": 0.9,
+      "cancellation_rate": 0.05,
+      "on_time_score": 0.88,
+      "risk_score": 0.09,
+      "completion_rate": 0.95,
+      "current_jobs": 2,
+      "days_since_last_review": 10
+    }
+  },
+  {
     "id": "prov-tutor-001",
     "name": "Dr. Ayesha Tutoring",
     "specializations": ["tutor"],

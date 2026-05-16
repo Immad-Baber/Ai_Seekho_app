@@ -1,56 +1,54 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowLeft, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { useOrchestration } from "@/hooks/useOrchestration";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function ProvidersPage() {
   const data = useOrchestration();
   return (
     <main className="p-4">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-white/60 mb-4">
-        <ArrowLeft size={16} /> Back
-      </Link>
-      <h1 className="text-xl font-bold mb-4">Provider Recommendations</h1>
+      <PageHeader title="Ustaad options" subtitle="AI ne rank kiya — best upar" />
       {!data?.matches?.length ? (
-        <p className="text-white/60 text-sm">Run orchestration first.</p>
+        <div className="card py-10 text-center text-ink-muted text-sm">
+          Pehle home se service book karein
+        </div>
       ) : (
         <div className="space-y-3">
           {data.matches.map((m) => (
             <div
               key={m.provider_id}
-              className={`glass rounded-2xl p-4 ${m.selected ? "border border-brand-500/50" : ""}`}
+              className={`card p-4 ${m.selected ? "ring-2 ring-brand-500 bg-brand-50/40" : ""}`}
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="font-semibold">{m.name}</p>
-                  <p className="text-xs text-white/50">{m.specialization.join(", ")}</p>
+                  <p className="font-bold text-ink text-lg">{m.name}</p>
+                  <p className="text-xs text-ink-muted">{m.specialization.join(" · ")}</p>
                 </div>
                 {m.selected && (
-                  <span className="text-xs bg-brand-600/30 text-brand-300 px-2 py-0.5 rounded-full">Selected</span>
+                  <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-[10px] font-bold text-white">
+                    Best match
+                  </span>
                 )}
               </div>
-              <div className="flex items-center gap-3 mt-2 text-sm">
-                <span className="flex items-center gap-1 text-amber-400">
+              <div className="mt-3 flex flex-wrap gap-2 text-sm">
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-0.5 font-semibold text-amber-800">
                   <Star size={14} fill="currentColor" /> {(m.total_score * 100).toFixed(0)}%
                 </span>
-                {m.distance_km != null && <span className="text-white/50">{m.distance_km} km</span>}
-                {m.eta_minutes != null && <span className="text-white/50">ETA {m.eta_minutes}m</span>}
-                <span className="text-white/50">PKR {m.hourly_rate}/hr</span>
+                {m.distance_km != null && (
+                  <span className="rounded-full bg-stone-100 px-2.5 py-0.5 text-ink-muted">
+                    {m.distance_km} km
+                  </span>
+                )}
+                {m.eta_minutes != null && (
+                  <span className="rounded-full bg-stone-100 px-2.5 py-0.5 text-ink-muted">
+                    {m.eta_minutes} min
+                  </span>
+                )}
+                <span className="rounded-full bg-stone-100 px-2.5 py-0.5 font-medium text-ink">
+                  PKR {m.hourly_rate}/hr
+                </span>
               </div>
-              {m.rejection_reasons.length > 0 && (
-                <p className="text-xs text-red-300/80 mt-2">Rejected: {m.rejection_reasons.join("; ")}</p>
-              )}
-              <details className="mt-2 text-xs text-white/60">
-                <summary className="cursor-pointer">Factor breakdown</summary>
-                <ul className="mt-1 space-y-1">
-                  {m.factor_scores?.slice(0, 6).map((f) => (
-                    <li key={f.factor}>
-                      {f.factor}: {(f.score * 100).toFixed(0)}% (w={(f.weighted * 100).toFixed(1)}%)
-                    </li>
-                  ))}
-                </ul>
-              </details>
             </div>
           ))}
         </div>
