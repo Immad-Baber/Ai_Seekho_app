@@ -16,8 +16,8 @@ const display = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Ustaad PK — Apna kaam, sahi ustaad",
-  description: "Pakistan ka smart service app. AC, plumber, electrician aur har kaam ke liye trusted ustaad.",
+  title: "AI Seekho — Apna kaam, sahi ustaad",
+  description: "Pakistan ka smart AI service app. AC, plumber, electrician aur har kaam ke liye trusted ustaad.",
   manifest: "/manifest.json",
 };
 
@@ -32,7 +32,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ur" className={`${sans.variable} ${display.variable}`}>
       <body className="font-sans pb-24">
-        <div className="mx-auto min-h-screen max-w-lg">{children}</div>
+        <div className="mx-auto min-h-screen max-w-lg">
+          {children}
+        </div>
+        {/* BottomNav handles its own visibility (hides on auth pages) */}
         <BottomNav />
       </body>
     </html>

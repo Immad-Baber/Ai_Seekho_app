@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Mic, Send, ChevronRight, MapPin, Shield, Clock, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Mic, Send, ChevronRight, MapPin, Shield, Clock, Sparkles, UserCircle } from "lucide-react";
 import { orchestrate, runDemo, type OrchestrationResult } from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ServiceCategories } from "@/components/ServiceCategories";
+import { getUser } from "@/lib/auth";
 
 const QUICK = [
   { text: "Mujhe kal subah AC service chahiye G-13", label: "AC" },
@@ -22,16 +24,28 @@ const QUICK = [
 
 const TRUST = [
   { icon: Shield, text: "Verified ustaad" },
-  { icon: Clock, text: "On-time guarantee" },
+  { icon: Clock,  text: "On-time guarantee" },
   { icon: MapPin, text: "Apke area mein" },
 ];
 
 export default function HomePage() {
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<OrchestrationResult | null>(null);
-  const [error, setError] = useState("");
+  const router = useRouter();
+  const [message, setMessage]   = useState("");
+  const [loading, setLoading]   = useState(false);
+  const [result, setResult]     = useState<OrchestrationResult | null>(null);
+  const [error, setError]       = useState("");
   const [showDemos, setShowDemos] = useState(false);
+  const [mounted, setMounted]   = useState(false);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+    const u = getUser();
+    if (!u) { router.push("/select-role"); return; }
+    // Providers go to their own dashboard
+    if (u.role === "provider") { router.push("/provider"); return; }
+    setUserName(u.name.split(" ")[0]);
+  }, [router]);
 
   async function submit(text?: string) {
     const msg = text || message;
@@ -50,21 +64,30 @@ export default function HomePage() {
     }
   }
 
+  if (!mounted) return null;
+
   return (
     <main className="flex min-h-screen flex-col px-4 pt-5 pb-6">
-      <header className="mb-5">
-        <BrandLogo size="md" showTagline />
-        <div className="mt-4 flex flex-wrap gap-2">
-          {TRUST.map(({ icon: Icon, text }) => (
-            <span
-              key={text}
-              className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-medium text-brand-800"
-            >
-              <Icon size={12} />
-              {text}
-            </span>
-          ))}
+      {/* Header with greeting and profile link */}
+      <header className="mb-5 flex items-start justify-between">
+        <div>
+          <BrandLogo size="md" showTagline />
+          {userName && (
+            <p className="mt-2 text-sm font-semibold text-ink-muted">
+              Assalam-o-Alaikum, <span className="text-brand-600">{userName}</span> 👋
+            </p>
+          )}
+          <div className="mt-3 flex flex-wrap gap-2">
+            {TRUST.map(({ icon: Icon, text }) => (
+              <span key={text} className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-medium text-brand-800">
+                <Icon size={12} /> {text}
+              </span>
+            ))}
+          </div>
         </div>
+        <Link href="/profile" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-100 text-brand-700 hover:bg-brand-200 transition">
+          <UserCircle size={22} />
+        </Link>
       </header>
 
       <section className="card-elevated mb-5 overflow-hidden p-0">
@@ -82,8 +105,7 @@ export default function HomePage() {
           />
           <div className="mt-3 flex gap-2">
             <Link href="/voice" className="btn-secondary flex-1 py-2.5">
-              <Mic size={18} />
-              Bol kar batao
+              <Mic size={18} /> Bol kar batao
             </Link>
             <button onClick={() => submit()} disabled={loading} className="btn-primary flex-[1.4] py-2.5">
               {loading ? (
@@ -92,10 +114,7 @@ export default function HomePage() {
                   Dhundh rahe hain...
                 </span>
               ) : (
-                <>
-                  <Send size={18} />
-                  Ustaad dhundo
-                </>
+                <><Send size={18} /> Ustaad dhundo</>
               )}
             </button>
           </div>
@@ -111,16 +130,9 @@ export default function HomePage() {
         <p className="section-title mb-2">Jaldi examples</p>
         <div className="flex flex-col gap-2">
           {QUICK.map(({ text, label }) => (
-            <button
-              key={text}
-              type="button"
-              onClick={() => submit(text)}
-              disabled={loading}
-              className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]"
-            >
-              <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">
-                {label}
-              </span>
+            <button key={text} type="button" onClick={() => submit(text)} disabled={loading}
+              className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]">
+              <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">{label}</span>
               <span className="flex-1 text-sm font-medium text-ink leading-snug">{text}</span>
               <ChevronRight size={16} className="shrink-0 text-ink-faint" />
             </button>
@@ -128,58 +140,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      <button
-        type="button"
-        onClick={() => setShowDemos(!showDemos)}
-        className="text-xs font-medium text-ink-faint underline mb-2"
-      >
+      <button type="button" onClick={() => setShowDemos(!showDemos)}
+        className="text-xs font-medium text-ink-faint underline mb-2">
         {showDemos ? "Demo hide karein" : "Demo scenarios (testing)"}
       </button>
       {showDemos && (
         <div className="mb-4 grid grid-cols-2 gap-2">
-          {[
-            "ac-repair",
-            "plumber-urgent",
-            "electrician-wiring",
-            "beautician-home",
-            "tutor-math",
-            "mechanic-car",
-            "driver-airport",
-            "cleaning-safai",
-            "appliance-repair",
-            "home-repair",
-            "ambiguous-input",
-            "schedule-conflict",
-            "no-provider",
-          ].map((id) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => runDemo(id).then((r) => {
-                setResult(r);
-                sessionStorage.setItem("lastOrchestration", JSON.stringify(r));
-              })}
-              className="chip justify-center text-[10px]"
-            >
-              {id}
-            </button>
+          {["ac-repair","plumber-urgent","electrician-wiring","beautician-home","tutor-math",
+            "mechanic-car","driver-airport","cleaning-safai","appliance-repair","home-repair",
+            "ambiguous-input","schedule-conflict","no-provider"].map((id) => (
+            <button key={id} type="button"
+              onClick={() => runDemo(id).then((r) => { setResult(r); sessionStorage.setItem("lastOrchestration", JSON.stringify(r)); })}
+              className="chip justify-center text-[10px]">{id}</button>
           ))}
         </div>
       )}
 
       {error && (
-        <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-          {error}
-        </div>
+        <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
       )}
 
       <AnimatePresence>
         {result && (
-          <motion.section
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-3 animate-fade-up"
-          >
+          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
             <div className="card border-l-4 border-l-brand-500 p-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">
                 Samajh aa gaya · {result.intent.detected_language}
@@ -189,18 +172,13 @@ export default function HomePage() {
               </p>
               <p className="mt-1 text-sm text-ink-muted">
                 {result.intent.location_text && (
-                  <>
-                    <MapPin size={14} className="inline mr-0.5 -mt-0.5" />
-                    {result.intent.location_text} ·{" "}
-                  </>
+                  <><MapPin size={14} className="inline mr-0.5 -mt-0.5" />{result.intent.location_text} · </>
                 )}
                 {Math.round(result.intent.confidence * 100)}% sure
               </p>
               {result.intent.needs_clarification && (
                 <ul className="mt-3 space-y-1 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
-                  {result.intent.clarification_questions.map((q, i) => (
-                    <li key={i}>• {q}</li>
-                  ))}
+                  {result.intent.clarification_questions.map((q, i) => (<li key={i}>• {q}</li>))}
                 </ul>
               )}
             </div>
@@ -224,18 +202,15 @@ export default function HomePage() {
 
             <div className="grid grid-cols-2 gap-2">
               {[
-                { href: "/summary", label: "Details", sub: "Poora summary" },
-                { href: "/providers", label: "Ustaad", sub: "Sab options" },
-                { href: "/pricing", label: "Qeemat", sub: "Breakdown" },
-                { href: "/confirm", label: "Confirm", sub: "Book karein" },
+                { href: "/summary",   label: "Details",    sub: "Poora summary" },
+                { href: "/providers", label: "Ustaad",     sub: "Sab options" },
+                { href: "/pricing",   label: "Qeemat",     sub: "Breakdown" },
+                { href: "/confirm",   label: "Confirm",    sub: "Book karein" },
                 { href: "/reasoning", label: "AI samjhao", sub: "Kyun ye ustaad?" },
-                { href: "/tracking", label: "Track", sub: "Live status" },
+                { href: "/tracking",  label: "Track",      sub: "Live status" },
               ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="card flex flex-col p-3 transition hover:border-brand-300 hover:shadow-card-hover"
-                >
+                <Link key={link.href} href={link.href}
+                  className="card flex flex-col p-3 transition hover:border-brand-300 hover:shadow-card-hover">
                   <span className="font-semibold text-ink">{link.label}</span>
                   <span className="text-[11px] text-ink-muted">{link.sub}</span>
                 </Link>

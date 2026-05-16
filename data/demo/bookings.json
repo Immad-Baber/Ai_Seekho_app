@@ -107,5 +107,597 @@
       "confirmed",
       "provider_assigned"
     ]
+  },
+  {
+    "id": "BK-DE03A8F6",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:19:56.503339",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-6DF48DD5",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:19:59.909650",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-1F919F0E",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:20:10.541046",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-704313D7",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:20:12.733987",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-25FE388D",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:20:14.569275",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-E255EDFC",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:20:15.727313",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-4080C8C0",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:20:21.301138",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-495ED488",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:22:10.883748",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-AB15920A",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:22:15.476118",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-E9128B42",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:22:16.853651",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-A0CBB72D",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:22:17.620199",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-9AB70F0C",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 3427.0,
+    "scheduled_start": "2026-05-16T11:30:00",
+    "scheduled_end": "2026-05-16T13:30:00",
+    "created_at": "2026-05-16T20:25:20.737237",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-575754F3",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:28:52.820246",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-7A1F86F3",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:30:26.662666",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-B929F081",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-elec-001",
+    "provider_name": "Waqas Electric Works",
+    "service_type": "electrician",
+    "status": "confirmed",
+    "total_price": 2155.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:30:28.378312",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-8B50724F",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:30.086428",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-C19B1075",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-mech-001",
+    "provider_name": "AutoCare Tariq",
+    "service_type": "mechanic",
+    "status": "confirmed",
+    "total_price": 2595.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:30:31.545820",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-BF7C6830",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:30:35.157727",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-0345EBB4",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:36.619068",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-4AA3E46B",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-elec-001",
+    "provider_name": "Waqas Electric Works",
+    "service_type": "electrician",
+    "status": "confirmed",
+    "total_price": 2155.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:38.055165",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-9F108C45",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:39.317589",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-4ECD27B6",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2594.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:41.111846",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-04FDBF25",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "driver",
+    "status": "confirmed",
+    "total_price": 1643.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:30:42.751023",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-EA3E4137",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "appliance",
+    "status": "confirmed",
+    "total_price": 2165.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:30:46.894277",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-8DBB819D",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "appliance",
+    "status": "confirmed",
+    "total_price": 2165.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:01.045349",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-3BF96BC5",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "driver",
+    "status": "confirmed",
+    "total_price": 1643.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:31:29.611057",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-9D1D4D0C",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:30.556705",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-505981A3",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T20:31:31.474739",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-542BD57B",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-tutor-001",
+    "provider_name": "Dr. Ayesha Tutoring",
+    "service_type": "tutor",
+    "status": "confirmed",
+    "total_price": 1903.0,
+    "scheduled_start": "2026-05-16T22:00:00",
+    "scheduled_end": "2026-05-17T00:00:00",
+    "created_at": "2026-05-16T20:31:32.440699",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-286154D2",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "appliance",
+    "status": "confirmed",
+    "total_price": 2165.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:33.200207",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-AB8081D2",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2594.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:34.382852",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-81AA1C81",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-clean-001",
+    "provider_name": "Sparkle Home Services",
+    "service_type": "cleaning",
+    "status": "confirmed",
+    "total_price": 1396.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:35.273547",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-3D0BDC39",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-elec-001",
+    "provider_name": "Waqas Electric Works",
+    "service_type": "electrician",
+    "status": "confirmed",
+    "total_price": 2155.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:37.169769",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-A625EFEA",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-16T23:30:00",
+    "scheduled_end": "2026-05-17T01:30:00",
+    "created_at": "2026-05-16T20:31:37.914027",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-8A53E419",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T21:08:12.437697",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-D6768D28",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T21:08:13.670311",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-4E8002A4",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-17T11:30:00",
+    "scheduled_end": "2026-05-17T13:30:00",
+    "created_at": "2026-05-16T21:08:24.468835",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
   }
 ]
