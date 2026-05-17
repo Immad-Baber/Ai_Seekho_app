@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getUser, type AuthUser } from "@/lib/auth";
+import { getUser, getProviderStats, type AuthUser } from "@/lib/auth";
 import {
   Calendar, DollarSign, Star, TrendingDown,
   Clock, Map, Briefcase, ChevronRight, UserCircle,
@@ -22,6 +22,7 @@ export default function ProviderDashboard() {
   const router = useRouter();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [stats, setStats] = useState({ todayJobs: 0, avgRating: "0.0", onTimeRate: "0%" });
 
   useEffect(() => {
     setMounted(true);
@@ -29,6 +30,12 @@ export default function ProviderDashboard() {
     if (!u) { router.push("/select-role"); return; }
     if (u.role !== "provider") { router.push("/"); return; }
     setUser(u);
+    const s = getProviderStats(u.phone);
+    setStats({
+      todayJobs: s.todayJobs,
+      avgRating: s.avgRating,
+      onTimeRate: s.onTimeRate,
+    });
   }, [router]);
 
   if (!mounted || !user) return null;
@@ -57,7 +64,11 @@ export default function ProviderDashboard() {
         <h2 className="font-display text-2xl font-bold mt-0.5">{user.name}</h2>
         <p className="mt-1 text-xs text-accent-100">AI-autonomous matching · Antigravity Platform</p>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-          {[["3", "Aaj ke kaam"], ["4.8", "Rating"], ["91%", "On-time"]].map(([val, lbl]) => (
+          {[
+            [String(stats.todayJobs), "Aaj ke kaam"],
+            [stats.avgRating === "0.0" ? "—" : stats.avgRating, "Rating"],
+            [stats.onTimeRate === "0%" ? "—" : stats.onTimeRate, "On-time"],
+          ].map(([val, lbl]) => (
             <div key={lbl} className="rounded-2xl bg-white/15 py-2.5">
               <p className="text-xl font-bold">{val}</p>
               <p className="text-[10px] text-accent-100 mt-0.5">{lbl}</p>

@@ -11,7 +11,7 @@ import { orchestrate, runDemo, type OrchestrationResult } from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ServiceCategories } from "@/components/ServiceCategories";
-import { getUser, saveBooking, addNotification } from "@/lib/auth";
+import { getUser, saveBooking, addNotification, getAllProviders, saveProviderJob, type ProviderJob } from "@/lib/auth";
 
 const QUICK = [
   { text: "Mujhe kal subah AC service chahiye G-13", label: "AC" },
@@ -69,11 +69,14 @@ export default function HomePage() {
     if (!user) return;
 
     const bookingId = result.booking_id || `BK-${Date.now()}`;
+    const serviceType = result.intent?.service_type || "Service";
+    const providerName = result.selected_provider?.name || "Ustaad";
+
     saveBooking(user.phone, {
       id: bookingId,
       booking_id: bookingId,
-      provider_name: result.selected_provider?.name || "Ustaad",
-      service_type: result.intent?.service_type || "Service",
+      provider_name: providerName,
+      service_type: serviceType,
       status: "confirmed",
       total_price: result.pricing?.total || 0,
       created_at: new Date().toISOString(),
@@ -81,8 +84,75 @@ export default function HomePage() {
     });
     addNotification(user.phone, {
       title: "✅ Booking Confirm Ho Gayi!",
-      body: `${result.selected_provider?.name || "Ustaad"} aapke pass aa raha hai. Booking ID: ${bookingId}`,
+      body: `${providerName} aapke pass aa raha hai. Booking ID: ${bookingId}`,
     });
+    
+    // Simulate Follow-Up Automation (Requirement 6)
+    // Add these to the feed so the user can see the automation working
+    setTimeout(() => {
+      addNotification(user.phone, {
+        title: "⏰ Reminder: Ustaad aa raha hai",
+        body: `Aapka ustaad ${providerName} 1 ghante mein pahuchega. Tayar rahein!`,
+      });
+    }, 2000);
+
+    // ── Create a job for matching providers ──
+    // Map service type to provider domain
+    const serviceLower = serviceType.toLowerCase();
+    const domainMap: Record<string, string[]> = {
+      "Electrician": ["electric", "wiring", "fan", "bijli", "switch", "light"],
+      "Plumber": ["plumb", "geyser", "leak", "pani", "pipe", "tap"],
+      "AC Technician": ["ac", "air condition", "cooling", "gas refill", "ac_repair", "ac_service"],
+      "Home Cleaning": ["clean", "safai", "deep clean"],
+      "Home Beautician": ["beauty", "beautician", "facial", "makeup"],
+      "Tutor": ["tutor", "teach", "class", "math", "english"],
+      "Mechanic": ["mechanic", "car", "engine", "gari", "vehicle"],
+      "Carpenter": ["carpenter", "furniture", "door", "wood"],
+      "Painter": ["paint", "wall", "color"],
+      "Driver": ["driver", "airport", "drop", "pick"],
+    };
+
+    let matchDomain = "";
+    for (const [domain, keywords] of Object.entries(domainMap)) {
+      if (keywords.some((kw) => serviceLower.includes(kw))) {
+        matchDomain = domain;
+        break;
+      }
+    }
+
+    // Find matching providers and assign job to them
+    if (matchDomain) {
+      const providers = getAllProviders();
+      const matchingProviders = providers.filter(
+        (p) => (p.domain || "").toLowerCase() === matchDomain.toLowerCase()
+      );
+
+      matchingProviders.forEach((provider) => {
+        const job: ProviderJob = {
+          id: `J-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          service: serviceType.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
+          area: result.intent?.location_text || user.address || "Islamabad",
+          time: result.schedule?.start
+            ? new Date(result.schedule.start).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", hour12: true })
+            : "10:00 AM",
+          pay: result.pricing?.total || 2000,
+          status: "auto-assigned",
+          customer: user.name,
+          customerPhone: user.phone,
+          bookingId,
+          assignedAt: new Date().toISOString(),
+          domain: matchDomain,
+        };
+        saveProviderJob(provider.phone, job);
+
+        // Notify the provider
+        addNotification(provider.phone, {
+          title: "🔔 Naya Kaam Assign Hua!",
+          body: `${serviceType} — ${user.name} ne booking ki hai. Booking ID: ${bookingId}`,
+        });
+      });
+    }
+
     setAutoBooked(true);
   }, [result, autoBooked]);
 
@@ -318,11 +388,11 @@ export default function HomePage() {
             {/* Action links */}
             <div className="grid grid-cols-2 gap-2">
               {[
-                { href: "/summary",      label: "Details",    sub: "Poora summary",    icon: BarChart2 },
-                { href: "/providers",    label: "Ustaad",     sub: "Sab options",      icon: UserCircle },
-                { href: "/pricing",      label: "Qeemat",     sub: "Breakdown",        icon: CheckCircle2 },
-                { href: "/reasoning",    label: "AI samjhao", sub: "Kyun ye ustaad?",  icon: Bot },
+                { href: "/receipt",      label: "Receipt",    sub: "Booking details",  icon: CheckCircle2 },
                 { href: "/tracking",     label: "Track",      sub: "Live status",      icon: MapPin },
+                { href: "/reasoning",    label: "AI samjhao", sub: "Kyun ye ustaad?",  icon: Bot },
+                { href: "/providers",    label: "Ustaad",     sub: "Sab options",      icon: UserCircle },
+                { href: "/summary",      label: "Details",    sub: "Poora summary",    icon: BarChart2 },
                 { href: "/bookings",     label: "Bookings",   sub: "Meri history",     icon: Shield },
               ].map((link) => {
                 const Icon = link.icon;

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { getUser, logout, type AuthUser } from "@/lib/auth";
+import { getUser, logout, getProviderStats, type AuthUser } from "@/lib/auth";
 import {
   Wrench, Phone, CreditCard, Clock,
   Star, DollarSign, Calendar, Bell, Shield, HelpCircle,
@@ -46,14 +46,14 @@ function Modal({ title, icon: Icon, children, onClose }: {
   );
 }
 
-function PerformanceModal({ onClose }: { onClose: () => void }) {
+function PerformanceModal({ stats, onClose }: { stats: ReturnType<typeof getProviderStats>; onClose: () => void }) {
   const metrics = [
-    { label: "Jobs Completed", value: "47", sub: "This month", color: "text-green-600", bg: "bg-green-50" },
-    { label: "Average Rating", value: "4.8★", sub: "From 47 reviews", color: "text-amber-600", bg: "bg-amber-50" },
-    { label: "On-Time Rate", value: "91%", sub: "Industry avg: 78%", color: "text-brand-600", bg: "bg-brand-50" },
-    { label: "Response Time", value: "4 min", sub: "To accept jobs", color: "text-purple-600", bg: "bg-purple-50" },
-    { label: "Cancellation Rate", value: "3%", sub: "Very low ✅", color: "text-green-600", bg: "bg-green-50" },
-    { label: "Repeat Customers", value: "62%", sub: "Return bookings", color: "text-accent-600", bg: "bg-accent-50" },
+    { label: "Jobs Completed", value: String(stats.completedJobs), sub: "Total completed", color: "text-green-600", bg: "bg-green-50" },
+    { label: "Average Rating", value: stats.totalReviews > 0 ? `${stats.avgRating}★` : "—", sub: stats.totalReviews > 0 ? `From ${stats.totalReviews} reviews` : "No reviews yet", color: "text-amber-600", bg: "bg-amber-50" },
+    { label: "On-Time Rate", value: stats.completedJobs > 0 ? stats.onTimeRate : "—", sub: stats.completedJobs > 0 ? "Based on completed jobs" : "No data yet", color: "text-brand-600", bg: "bg-brand-50" },
+    { label: "Total Jobs", value: String(stats.totalJobs), sub: "All assignments", color: "text-purple-600", bg: "bg-purple-50" },
+    { label: "Cancellation Rate", value: stats.totalJobs > 0 ? `${Math.round((stats.cancelledJobs / stats.totalJobs) * 100)}%` : "—", sub: stats.totalJobs > 0 ? `${stats.cancelledJobs} cancelled` : "No data", color: "text-green-600", bg: "bg-green-50" },
+    { label: "Completion Rate", value: stats.completedJobs > 0 ? stats.completionRate : "—", sub: "Jobs delivered", color: "text-accent-600", bg: "bg-accent-50" },
   ];
   return (
     <Modal title="Performance Analytics" icon={BarChart2} onClose={onClose}>
@@ -167,11 +167,13 @@ export default function ProviderProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [modal, setModal] = useState<"analytics" | "privacy" | "help" | null>(null);
+  const [stats, setStats] = useState<ReturnType<typeof getProviderStats> | null>(null);
 
   useEffect(() => {
     const u = getUser();
     if (!u || u.role !== "provider") { router.push("/select-role"); return; }
     setUser(u);
+    setStats(getProviderStats(u.phone));
   }, [router]);
 
   if (!user) return null;
@@ -183,7 +185,7 @@ export default function ProviderProfilePage() {
 
   return (
     <>
-      {modal === "analytics" && <PerformanceModal onClose={() => setModal(null)} />}
+      {modal === "analytics" && stats && <PerformanceModal stats={stats} onClose={() => setModal(null)} />}
       {modal === "privacy" && <PrivacyModal onClose={() => setModal(null)} />}
       {modal === "help" && <HelpModal onClose={() => setModal(null)} />}
 
@@ -214,8 +216,8 @@ export default function ProviderProfilePage() {
           <div className="grid grid-cols-3 divide-x divide-white/20 rounded-2xl bg-white/10 text-center">
             {[
               [user.experience ? `${user.experience}yr` : "—", "Experience"],
-              ["4.8", "Rating"],
-              ["91%", "On-time"],
+              [stats && stats.totalReviews > 0 ? stats.avgRating : "—", "Rating"],
+              [stats && stats.completedJobs > 0 ? stats.onTimeRate : "—", "On-time"],
             ].map(([val, lbl]) => (
               <div key={lbl} className="py-3">
                 <p className="text-lg font-bold">{val}</p>

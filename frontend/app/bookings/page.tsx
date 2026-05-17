@@ -80,6 +80,13 @@ export default function BookingsPage() {
                   </div>
                 </div>
 
+                {b.status === "completed" && (
+                  <div className="mt-3 pt-3 border-t border-stone-100 flex items-center justify-between">
+                    <p className="text-xs font-semibold text-ink-muted">Service Mukammal</p>
+                    <span className="text-xs font-bold text-brand-600 hover:text-brand-700">⭐ Rate Service</span>
+                  </div>
+                )}
+
                 <div className="mt-2 flex items-center justify-between">
                   <p className="text-[11px] font-mono text-ink-faint">#{b.booking_id || b.id}</p>
                   <ChevronRight size={16} className="text-ink-faint" />

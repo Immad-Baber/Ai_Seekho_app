@@ -1,23 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft, ChevronLeft, ChevronRight,
   Clock, CheckCircle2, XCircle, Plus, Zap,
 } from "lucide-react";
+import { getUser, getProviderJobs, type AuthUser, type ProviderJob } from "@/lib/auth";
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-
-// May 2026 starts on Friday (day index 5)
-const MAY_DATES: (number | null)[][] = [
-  [null, null, null, null, null, 1, 2],
-  [3, 4, 5, 6, 7, 8, 9],
-  [10, 11, 12, 13, 14, 15, 16],
-  [17, 18, 19, 20, 21, 22, 23],
-  [24, 25, 26, 27, 28, 29, 30],
-  [31, null, null, null, null, null, null],
-];
 
 type SlotStatus = "booked" | "open" | "blocked" | "completed";
 
@@ -29,47 +21,40 @@ interface TimeSlot {
   pay?: number;
 }
 
-const DAY_SLOTS: Record<number, TimeSlot[]> = {
-  17: [
-    { time: "09:00 AM", status: "completed", service: "AC Gas Refill", customer: "Ali Khan", pay: 4500 },
-    { time: "10:30 AM", status: "open" },
-    { time: "11:30 AM", status: "completed", service: "Geyser Repair", customer: "Fatima Malik", pay: 2800 },
-    { time: "01:00 PM", status: "blocked" },
-    { time: "02:00 PM", status: "booked", service: "Fan Wiring", customer: "Ahmed Raza", pay: 2600 },
-    { time: "04:00 PM", status: "open" },
-    { time: "05:30 PM", status: "open" },
-  ],
-  18: [
-    { time: "09:00 AM", status: "booked", service: "Deep Cleaning", customer: "Umar Farooq", pay: 3600 },
-    { time: "11:00 AM", status: "open" },
-    { time: "02:00 PM", status: "booked", service: "Car Repair", customer: "Bilal Ahmed", pay: 3200 },
-    { time: "04:30 PM", status: "open" },
-  ],
-  19: [
-    { time: "10:00 AM", status: "open" },
-    { time: "12:00 PM", status: "open" },
-    { time: "03:00 PM", status: "open" },
-  ],
-  20: [
-    { time: "09:30 AM", status: "booked", service: "AC Service", customer: "Sara Iqbal", pay: 4000 },
-    { time: "11:30 AM", status: "open" },
-    { time: "02:00 PM", status: "blocked" },
-  ],
-  21: [
-    { time: "10:00 AM", status: "open" },
-    { time: "02:00 PM", status: "open" },
-    { time: "05:00 PM", status: "open" },
-  ],
-  22: [
-    { time: "09:00 AM", status: "blocked" },
-    { time: "01:00 PM", status: "blocked" },
-    { time: "04:00 PM", status: "open" },
-  ],
-};
+// Generate calendar grid for any month/year
+function getCalendarGrid(year: number, month: number): (number | null)[][] {
+  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-const BOOKED_DAYS = new Set([8, 10, 13, 15, 17, 18, 20]);
-const COMPLETED_DAYS = new Set([1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 14, 16]);
-const BLOCKED_DAYS = new Set([22]);
+  const grid: (number | null)[][] = [];
+  let week: (number | null)[] = [];
+
+  // Fill initial empty cells
+  for (let i = 0; i < firstDay; i++) {
+    week.push(null);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    week.push(day);
+    if (week.length === 7) {
+      grid.push(week);
+      week = [];
+    }
+  }
+
+  // Fill trailing empty cells
+  if (week.length > 0) {
+    while (week.length < 7) week.push(null);
+    grid.push(week);
+  }
+
+  return grid;
+}
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
 
 const STATUS_STYLE: Record<SlotStatus, string> = {
   booked:    "bg-brand-50 border-brand-200 text-brand-700",
@@ -91,17 +76,90 @@ const STATUS_LABEL: Record<SlotStatus, string> = {
 };
 
 export default function ProviderCalendar() {
-  const [selectedDay, setSelectedDay] = useState<number | null>(17);
-  const [month] = useState("May 2026");
+  const router = useRouter();
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  const slots = selectedDay ? (DAY_SLOTS[selectedDay] || [
-    { time: "10:00 AM", status: "open" as SlotStatus },
-    { time: "02:00 PM", status: "open" as SlotStatus },
-    { time: "05:00 PM", status: "open" as SlotStatus },
-  ]) : [];
+  const now = new Date();
+  const [viewYear, setViewYear] = useState(now.getFullYear());
+  const [viewMonth, setViewMonth] = useState(now.getMonth());
+  const [selectedDay, setSelectedDay] = useState<number | null>(now.getDate());
+  const [jobs, setJobs] = useState<ProviderJob[]>([]);
+
+  useEffect(() => {
+    const u = getUser();
+    if (!u || u.role !== "provider") { router.push("/select-role"); return; }
+    setUser(u);
+    setJobs(getProviderJobs(u.phone));
+  }, [router]);
+
+  const calendarGrid = useMemo(() => getCalendarGrid(viewYear, viewMonth), [viewYear, viewMonth]);
+  const monthLabel = `${MONTH_NAMES[viewMonth]} ${viewYear}`;
+
+  // Build per-day data from jobs
+  const dayJobMap = useMemo(() => {
+    const map: Record<number, ProviderJob[]> = {};
+    jobs.forEach((j) => {
+      const d = new Date(j.assignedAt);
+      if (d.getFullYear() === viewYear && d.getMonth() === viewMonth) {
+        const day = d.getDate();
+        if (!map[day]) map[day] = [];
+        map[day].push(j);
+      }
+    });
+    return map;
+  }, [jobs, viewYear, viewMonth]);
+
+  // Generate time slots for selected day from actual jobs
+  const slots: TimeSlot[] = useMemo(() => {
+    if (!selectedDay) return [];
+    const dayJobs = dayJobMap[selectedDay] || [];
+
+    if (dayJobs.length === 0) {
+      // No jobs — show open slots
+      return [
+        { time: "09:00 AM", status: "open" },
+        { time: "11:00 AM", status: "open" },
+        { time: "02:00 PM", status: "open" },
+        { time: "04:00 PM", status: "open" },
+      ];
+    }
+
+    return dayJobs.map((j) => ({
+      time: j.time,
+      status: j.status === "completed" ? "completed" as const
+        : j.status === "cancelled" ? "blocked" as const
+        : "booked" as const,
+      service: j.service,
+      customer: j.customer,
+      pay: j.pay,
+    }));
+  }, [selectedDay, dayJobMap]);
 
   const openCount = slots.filter((s) => s.status === "open").length;
   const bookedCount = slots.filter((s) => s.status === "booked" || s.status === "completed").length;
+
+  const prevMonth = () => {
+    if (viewMonth === 0) {
+      setViewMonth(11);
+      setViewYear(viewYear - 1);
+    } else {
+      setViewMonth(viewMonth - 1);
+    }
+    setSelectedDay(null);
+  };
+
+  const nextMonth = () => {
+    if (viewMonth === 11) {
+      setViewMonth(0);
+      setViewYear(viewYear + 1);
+    } else {
+      setViewMonth(viewMonth + 1);
+    }
+    setSelectedDay(null);
+  };
+
+  const today = now.getDate();
+  const isCurrentMonth = viewYear === now.getFullYear() && viewMonth === now.getMonth();
 
   return (
     <main className="flex min-h-screen flex-col px-4 pt-6 pb-28">
@@ -130,11 +188,11 @@ export default function ProviderCalendar() {
       {/* Month Calendar */}
       <div className="card mb-4 p-4">
         <div className="flex items-center justify-between mb-3">
-          <button className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-100 hover:bg-stone-200 transition">
+          <button onClick={prevMonth} className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-100 hover:bg-stone-200 transition">
             <ChevronLeft size={16} />
           </button>
-          <p className="font-bold text-ink">{month}</p>
-          <button className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-100 hover:bg-stone-200 transition">
+          <p className="font-bold text-ink">{monthLabel}</p>
+          <button onClick={nextMonth} className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-100 hover:bg-stone-200 transition">
             <ChevronRight size={16} />
           </button>
         </div>
@@ -147,15 +205,16 @@ export default function ProviderCalendar() {
         </div>
 
         {/* Date grid */}
-        {MAY_DATES.map((week, wi) => (
+        {calendarGrid.map((week, wi) => (
           <div key={wi} className="grid grid-cols-7 gap-1 mb-1">
             {week.map((date, di) => {
               if (!date) return <div key={di} />;
               const isSelected = selectedDay === date;
-              const isToday = date === 17;
-              const isBooked = BOOKED_DAYS.has(date);
-              const isDone = COMPLETED_DAYS.has(date);
-              const isBlocked = BLOCKED_DAYS.has(date);
+              const isToday = isCurrentMonth && date === today;
+              const hasJobs = !!dayJobMap[date];
+              const dayJobs = dayJobMap[date] || [];
+              const hasCompleted = dayJobs.some((j) => j.status === "completed");
+              const hasBooked = dayJobs.some((j) => j.status === "auto-assigned" || j.status === "in-progress");
 
               return (
                 <button
@@ -166,18 +225,16 @@ export default function ProviderCalendar() {
                       ? "bg-brand-600 text-white shadow-md"
                       : isToday
                       ? "ring-2 ring-brand-400 text-brand-700 bg-brand-50"
-                      : isBlocked
-                      ? "bg-red-100 text-red-500"
-                      : isBooked
+                      : hasBooked
                       ? "bg-amber-100 text-amber-700 hover:bg-amber-200"
-                      : isDone
+                      : hasCompleted
                       ? "bg-green-100 text-green-700 hover:bg-green-200"
                       : "text-ink hover:bg-stone-100"
                     }`}
                 >
                   {date}
-                  {(isBooked || isDone) && !isSelected && (
-                    <span className={`absolute bottom-1 h-1 w-1 rounded-full ${isBooked ? "bg-amber-500" : "bg-green-500"}`} />
+                  {hasJobs && !isSelected && (
+                    <span className={`absolute bottom-1 h-1 w-1 rounded-full ${hasBooked ? "bg-amber-500" : "bg-green-500"}`} />
                   )}
                 </button>
               );
@@ -191,7 +248,6 @@ export default function ProviderCalendar() {
             { color: "bg-brand-500", label: "Selected" },
             { color: "bg-amber-300", label: "Scheduled" },
             { color: "bg-green-300", label: "Completed" },
-            { color: "bg-red-300", label: "Blocked" },
           ].map((l) => (
             <span key={l.label} className="flex items-center gap-1">
               <span className={`h-2.5 w-2.5 rounded-full ${l.color}`} />
@@ -205,7 +261,7 @@ export default function ProviderCalendar() {
       {selectedDay && (
         <div>
           <div className="flex items-center justify-between mb-3">
-            <p className="text-sm font-bold text-ink">{month.split(" ")[0]} {selectedDay} — Time Slots</p>
+            <p className="text-sm font-bold text-ink">{MONTH_NAMES[viewMonth]} {selectedDay} — Time Slots</p>
             <div className="flex gap-2">
               <span className="text-[11px] font-bold rounded-full bg-green-100 text-green-700 px-2 py-0.5">{openCount} Open</span>
               <span className="text-[11px] font-bold rounded-full bg-brand-100 text-brand-700 px-2 py-0.5">{bookedCount} Booked</span>

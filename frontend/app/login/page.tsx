@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
-import { getUser, saveUser } from "@/lib/auth";
+import { saveUser, getAllProviders, getAllCustomers } from "@/lib/auth";
 import { Phone, Eye, EyeOff, ArrowLeft, User, Wrench } from "lucide-react";
 
 const validatePhone = (v: string) => /^03[0-9]{9}$/.test(v.replace(/-/g, ""));
@@ -31,21 +31,36 @@ export default function LoginPage() {
     if (!validate()) return;
     setLoading(true);
     setTimeout(() => {
-      const existing = getUser();
-      if (existing && existing.phone.replace(/-/g, "") === phone.replace(/-/g, "") && existing.role === role) {
-        // Successful login — re-save to refresh session
-        saveUser(existing);
-        router.push(role === "provider" ? "/provider" : "/");
+      const normalizedPhone = phone.replace(/-/g, "");
+
+      // Search in the appropriate registry based on selected role
+      if (role === "provider") {
+        const providers = getAllProviders();
+        const found = providers.find(
+          (p) => p.phone.replace(/-/g, "") === normalizedPhone
+        );
+        if (found) {
+          // Found in registry — restore session
+          saveUser({ ...found, role: "provider" });
+          router.push("/provider");
+          return;
+        }
       } else {
-        // Demo: if no user saved yet, create a demo session
-        if (!existing) {
-          saveUser({ name: role === "provider" ? "Demo Ustaad" : "Demo User", phone, cnic: "12345-1234567-1", role });
-          router.push(role === "provider" ? "/provider" : "/");
-        } else {
-          setNotFound(true);
-          setLoading(false);
+        const customers = getAllCustomers();
+        const found = customers.find(
+          (c) => c.phone.replace(/-/g, "") === normalizedPhone
+        );
+        if (found) {
+          // Found in registry — restore session
+          saveUser({ ...found, role: "user" });
+          router.push("/");
+          return;
         }
       }
+
+      // Not found in registry
+      setNotFound(true);
+      setLoading(false);
     }, 1200);
   };
 

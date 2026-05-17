@@ -24,8 +24,14 @@ const PROVIDER_POOL: ProviderPool[] = [
   { id: "P5", name: "Rizwan Home Fix",     domain: "Electrician",    rating: 4.5, distance_km: 2.9, eta_minutes: 18, hourly_rate: 1050, available: true },
   { id: "P6", name: "Hassan Tech Pro",     domain: "AC Technician",  rating: 4.9, distance_km: 4.2, eta_minutes: 28, hourly_rate: 2000, available: true },
   { id: "P7", name: "Shahid Plumber",      domain: "Plumber",        rating: 4.4, distance_km: 1.2, eta_minutes: 10, hourly_rate: 950,  available: true },
-  { id: "P8", name: "Nadeem Cleaners",     domain: "Cleaning",       rating: 4.6, distance_km: 5.1, eta_minutes: 30, hourly_rate: 800,  available: true },
+  { id: "P8", name: "Nadeem Cleaners",     domain: "Home Cleaning",  rating: 4.6, distance_km: 5.1, eta_minutes: 30, hourly_rate: 800,  available: true },
   { id: "P9", name: "Amjad Multi-Service", domain: "General",        rating: 4.3, distance_km: 2.6, eta_minutes: 20, hourly_rate: 1000, available: true },
+  { id: "P10", name: "Kashif Beauty",      domain: "Home Beautician",rating: 4.7, distance_km: 3.0, eta_minutes: 20, hourly_rate: 1500, available: true },
+  { id: "P11", name: "Waqas Tutor",        domain: "Tutor",          rating: 4.8, distance_km: 2.5, eta_minutes: 18, hourly_rate: 900,  available: true },
+  { id: "P12", name: "Sajid Mechanic",     domain: "Mechanic",       rating: 4.5, distance_km: 3.8, eta_minutes: 25, hourly_rate: 1400, available: true },
+  { id: "P13", name: "Imran Carpenter",    domain: "Carpenter",      rating: 4.6, distance_km: 4.0, eta_minutes: 28, hourly_rate: 1100, available: true },
+  { id: "P14", name: "Farhan Painter",     domain: "Painter",        rating: 4.4, distance_km: 3.5, eta_minutes: 22, hourly_rate: 1000, available: true },
+  { id: "P15", name: "Asif Driver",        domain: "Driver",         rating: 4.7, distance_km: 1.5, eta_minutes: 10, hourly_rate: 800,  available: true },
 ];
 
 export interface ReAssignmentResult {
@@ -36,6 +42,7 @@ export interface ReAssignmentResult {
 
 /**
  * Agent selects the next best available provider based on:
+ *   - Domain matching (must match the job's service domain)
  *   - Highest rating (60% weight)
  *   - Shortest distance (40% weight)
  * Excludes the cancelled provider.
@@ -49,8 +56,53 @@ export async function runReAssignmentAgent(
   // Simulate network delay (agent thinking)
   await new Promise((r) => setTimeout(r, 2500));
 
-  const candidates = PROVIDER_POOL.filter(
-    (p) => p.id !== cancelledProviderId && p.available
+  // Also include registered providers from localStorage
+  let allProviders = [...PROVIDER_POOL];
+  if (typeof window !== "undefined") {
+    const { getAllProviders } = await import("@/lib/auth");
+    const registered = getAllProviders();
+    registered.forEach((p) => {
+      if (!allProviders.find((pp) => pp.id === p.phone.replace(/-/g, ""))) {
+        allProviders.push({
+          id: p.phone.replace(/-/g, ""),
+          name: p.name,
+          domain: p.domain || "General",
+          rating: 4.0,
+          distance_km: Math.round(Math.random() * 5 + 1),
+          eta_minutes: Math.round(Math.random() * 20 + 10),
+          hourly_rate: 1000,
+          available: true,
+        });
+      }
+    });
+  }
+
+  // Determine required domain from job service name
+  const serviceLower = jobService.toLowerCase();
+  const domainMap: Record<string, string[]> = {
+    "Electrician": ["electric", "wiring", "fan", "bijli", "switch", "light"],
+    "Plumber": ["plumb", "geyser", "leak", "pani", "pipe", "tap", "nalkay"],
+    "AC Technician": ["ac", "air condition", "cooling", "gas refill"],
+    "Home Cleaning": ["clean", "safai", "deep clean"],
+    "Home Beautician": ["beauty", "beautician", "facial", "makeup"],
+    "Tutor": ["tutor", "teach", "class", "math", "english"],
+    "Mechanic": ["mechanic", "car", "engine", "gari", "vehicle"],
+    "Carpenter": ["carpenter", "furniture", "door", "wood"],
+    "Painter": ["paint", "wall", "color"],
+    "Driver": ["driver", "airport", "drop", "pick"],
+  };
+
+  let requiredDomain = "";
+  for (const [domain, keywords] of Object.entries(domainMap)) {
+    if (keywords.some((kw) => serviceLower.includes(kw))) {
+      requiredDomain = domain;
+      break;
+    }
+  }
+
+  const candidates = allProviders.filter(
+    (p) => p.id !== cancelledProviderId && p.available &&
+      (requiredDomain === "" || p.domain === requiredDomain || p.domain === "General")
   );
 
   if (candidates.length === 0) {
@@ -87,3 +139,4 @@ export async function runReAssignmentAgent(
 
   return { success: true, newProvider, reason: "Agent ne next best match select kar liya" };
 }
+

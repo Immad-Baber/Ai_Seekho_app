@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft, Zap, ZapOff, Clock, MapPin,
-  Plus, Trash2, CheckCircle2, Moon,
+  Plus, CheckCircle2, Moon,
 } from "lucide-react";
+import {
+  getUser,
+  getProviderAvailability,
+  saveProviderAvailability,
+  type AuthUser,
+  type ProviderAvailabilityData,
+} from "@/lib/auth";
 
 const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -25,7 +33,7 @@ const DEFAULT_SCHEDULE: Record<string, WorkBlock[]> = {
   Sun: [],
 };
 
-const SERVICE_AREAS = [
+const DEFAULT_AREAS = [
   { area: "G-13", active: true },
   { area: "G-10", active: true },
   { area: "F-8", active: true },
@@ -35,11 +43,32 @@ const SERVICE_AREAS = [
 ];
 
 export default function ProviderAvailability() {
+  const router = useRouter();
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [online, setOnline] = useState(true);
   const [maxJobs, setMaxJobs] = useState(4);
   const [schedule, setSchedule] = useState(DEFAULT_SCHEDULE);
-  const [areas, setAreas] = useState(SERVICE_AREAS);
+  const [areas, setAreas] = useState(DEFAULT_AREAS);
   const [breakMode, setBreakMode] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [newArea, setNewArea] = useState("");
+  const [showAddArea, setShowAddArea] = useState(false);
+
+  useEffect(() => {
+    const u = getUser();
+    if (!u || u.role !== "provider") { router.push("/select-role"); return; }
+    setUser(u);
+
+    // Load saved availability from localStorage
+    const savedData = getProviderAvailability(u.phone);
+    if (savedData) {
+      setOnline(savedData.online);
+      setMaxJobs(savedData.maxJobs);
+      setSchedule(savedData.schedule);
+      setAreas(savedData.areas);
+      setBreakMode(savedData.breakMode);
+    }
+  }, [router]);
 
   const toggleDay = (day: string) => {
     setSchedule((prev) => {
@@ -55,8 +84,32 @@ export default function ProviderAvailability() {
     setAreas((prev) => prev.map((a, i) => i === idx ? { ...a, active: !a.active } : a));
   };
 
+  const addArea = () => {
+    if (newArea.trim()) {
+      setAreas((prev) => [...prev, { area: newArea.trim(), active: true }]);
+      setNewArea("");
+      setShowAddArea(false);
+    }
+  };
+
+  const handleSave = () => {
+    if (!user) return;
+    const data: ProviderAvailabilityData = {
+      online,
+      maxJobs,
+      breakMode,
+      schedule,
+      areas,
+    };
+    saveProviderAvailability(user.phone, data);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2000);
+  };
+
   const activeAreaCount = areas.filter((a) => a.active).length;
   const activeDayCount = Object.values(schedule).filter((d) => d.length > 0).length;
+
+  if (!user) return null;
 
   return (
     <main className="flex min-h-screen flex-col px-4 pt-6 pb-28">
@@ -210,15 +263,49 @@ export default function ProviderAvailability() {
               {a.active && <CheckCircle2 size={10} />}
             </button>
           ))}
-          <button className="flex items-center gap-1 rounded-full border border-dashed border-stone-300 px-3 py-1.5 text-xs font-bold text-ink-muted hover:border-brand-400 transition">
-            <Plus size={12} /> Add area
-          </button>
+          {showAddArea ? (
+            <div className="flex items-center gap-1">
+              <input
+                type="text"
+                value={newArea}
+                onChange={(e) => setNewArea(e.target.value)}
+                placeholder="Area name"
+                className="rounded-full border border-brand-300 px-3 py-1.5 text-xs w-28 focus:outline-none focus:ring-2 focus:ring-brand-400"
+                onKeyDown={(e) => e.key === "Enter" && addArea()}
+                autoFocus
+              />
+              <button onClick={addArea} className="rounded-full bg-brand-500 px-3 py-1.5 text-xs font-bold text-white">
+                Add
+              </button>
+              <button onClick={() => { setShowAddArea(false); setNewArea(""); }} className="text-xs text-ink-muted px-1">
+                ✕
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowAddArea(true)}
+              className="flex items-center gap-1 rounded-full border border-dashed border-stone-300 px-3 py-1.5 text-xs font-bold text-ink-muted hover:border-brand-400 transition"
+            >
+              <Plus size={12} /> Add area
+            </button>
+          )}
         </div>
       </div>
 
       {/* Save Button */}
-      <button className="btn-primary w-full py-3.5 text-base">
-        <CheckCircle2 size={18} /> Save Changes
+      <button
+        onClick={handleSave}
+        className={`btn-primary w-full py-3.5 text-base transition-all ${saved ? "!bg-green-500" : ""}`}
+      >
+        {saved ? (
+          <span className="flex items-center justify-center gap-2">
+            <CheckCircle2 size={18} /> Saved Successfully!
+          </span>
+        ) : (
+          <span className="flex items-center justify-center gap-2">
+            <CheckCircle2 size={18} /> Save Changes
+          </span>
+        )}
       </button>
     </main>
   );

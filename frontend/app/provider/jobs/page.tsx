@@ -6,64 +6,18 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft, Bot, CheckCircle2, Clock, MapPin, DollarSign,
   Zap, Calendar, Loader2, XCircle, AlertTriangle, RefreshCw,
-  Star, Navigation,
+  Star, Navigation, Inbox,
 } from "lucide-react";
-import { getUser } from "@/lib/auth";
+import { getUser, getProviderJobs, updateProviderJob, type ProviderJob } from "@/lib/auth";
 import { runReAssignmentAgent, type ProviderPool } from "@/lib/agent";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 type JobStatus = "auto-assigned" | "in-progress" | "completed" | "cancelled" | "re-assigning";
 
-interface Job {
-  id: string;
-  service: string;
-  area: string;
-  time: string;
-  pay: number;
-  status: JobStatus;
-  customer: string;
-  customerPhone: string; // to notify user
-  bookingId: string;
-  assignedAt: string;
-  cancelReason?: string;
+interface Job extends ProviderJob {
   reAssignedTo?: ProviderPool;
 }
-
-// ─── Initial Demo Data ───────────────────────────────────────────────────────
-
-const INITIAL_JOBS: Job[] = [
-  {
-    id: "J1", service: "AC gas refill", area: "G-13", time: "10:00 AM",
-    pay: 4500, status: "auto-assigned", customer: "Ali Khan",
-    customerPhone: "03001234567", bookingId: "BK-001",
-    assignedAt: new Date(Date.now() - 12 * 60000).toISOString(),
-  },
-  {
-    id: "J2", service: "Geyser leak repair", area: "G-10", time: "11:30 AM",
-    pay: 2800, status: "in-progress", customer: "Fatima Malik",
-    customerPhone: "03009876543", bookingId: "BK-002",
-    assignedAt: new Date(Date.now() - 45 * 60000).toISOString(),
-  },
-  {
-    id: "J3", service: "Fan wiring & installation", area: "F-8", time: "2:00 PM",
-    pay: 2600, status: "completed", customer: "Ahmed Raza",
-    customerPhone: "03005551234", bookingId: "BK-003",
-    assignedAt: new Date(Date.now() - 3 * 3600000).toISOString(),
-  },
-  {
-    id: "J4", service: "Airport drop", area: "F-7", time: "6:30 AM",
-    pay: 1800, status: "completed", customer: "Sara Iqbal",
-    customerPhone: "03007778888", bookingId: "BK-004",
-    assignedAt: new Date(Date.now() - 6 * 3600000).toISOString(),
-  },
-  {
-    id: "J5", service: "Deep cleaning (3 rooms)", area: "Bahria", time: "4:00 PM",
-    pay: 3600, status: "auto-assigned", customer: "Umar Farooq",
-    customerPhone: "03332221111", bookingId: "BK-005",
-    assignedAt: new Date(Date.now() - 5 * 60000).toISOString(),
-  },
-];
 
 const CANCEL_REASONS = [
   "Emergency (ghar mein masla ho gaya)",
@@ -159,7 +113,7 @@ function CancelModal({
 
 // ─── Re-Assignment Overlay ───────────────────────────────────────────────────
 
-function ReAssigningOverlay({ job }: { job: Job }) {
+function ReAssigningOverlay() {
   const [step, setStep] = useState(0);
   const STEPS = [
     "Cancel record ho raha hai...",
@@ -238,15 +192,27 @@ function ReAssignedResult({ provider }: { provider: ProviderPool }) {
 
 export default function ProviderJobs() {
   const router = useRouter();
-  const [jobs, setJobs] = useState<Job[]>(INITIAL_JOBS);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [filter, setFilter] = useState<JobStatus | "all">("all");
   const [cancelModal, setCancelModal] = useState<Job | null>(null);
-  const [providerInfo, setProviderInfo] = useState<{ id: string; name: string } | null>(null);
+  const [providerInfo, setProviderInfo] = useState<{ id: string; name: string; phone: string; domain: string } | null>(null);
 
   useEffect(() => {
     const u = getUser();
     if (!u || u.role !== "provider") { router.push("/select-role"); return; }
-    setProviderInfo({ id: u.cnic.replace(/-/g, ""), name: u.name });
+    setProviderInfo({ id: u.cnic.replace(/-/g, ""), name: u.name, phone: u.phone, domain: u.domain || "" });
+
+    // Load jobs from localStorage, filtered by provider's domain
+    const allJobs = getProviderJobs(u.phone);
+    const domain = (u.domain || "").toLowerCase();
+
+    // Filter jobs to only show ones matching provider's domain
+    const domainJobs = allJobs.filter((j) => {
+      const jobDomain = (j.domain || "").toLowerCase();
+      return jobDomain === domain || jobDomain === "" || domain === "";
+    });
+
+    setJobs(domainJobs as Job[]);
   }, [router]);
 
   const handleCancelConfirm = useCallback(async (job: Job, reason: string) => {
@@ -254,8 +220,12 @@ export default function ProviderJobs() {
 
     // Mark as re-assigning
     setJobs((prev) =>
-      prev.map((j) => j.id === job.id ? { ...j, status: "re-assigning", cancelReason: reason } : j)
+      prev.map((j) => j.id === job.id ? { ...j, status: "re-assigning" as const, cancelReason: reason } : j)
     );
+
+    if (providerInfo) {
+      updateProviderJob(providerInfo.phone, job.id, { status: "re-assigning", cancelReason: reason });
+    }
 
     // Run agent
     const result = await runReAssignmentAgent(
@@ -271,17 +241,22 @@ export default function ProviderJobs() {
         j.id === job.id
           ? {
               ...j,
-              status: "cancelled",
+              status: "cancelled" as const,
               cancelReason: reason,
               reAssignedTo: result.newProvider || undefined,
             }
           : j
       )
     );
-  }, [providerInfo]);
 
-  const canCancel = (status: JobStatus) =>
-    status === "auto-assigned" || status === "in-progress";
+    if (providerInfo) {
+      updateProviderJob(providerInfo.phone, job.id, {
+        status: "cancelled",
+        cancelReason: reason,
+        reAssignedTo: result.newProvider || undefined,
+      });
+    }
+  }, [providerInfo]);
 
   const displayJobs =
     filter === "all" ? jobs : jobs.filter((j) => j.status === filter);
@@ -313,7 +288,9 @@ export default function ProviderJobs() {
           <h1 className="font-display text-xl font-bold text-ink">Meri Jobs</h1>
           <p className="text-sm text-ink-muted flex items-center gap-1.5 mt-0.5">
             <Bot size={14} className="text-brand-600" />
-            AI ne automatically assign kiya — emergency mein cancel karo, agent naya ustaad dhundhe ga
+            {providerInfo?.domain
+              ? `Sirf ${providerInfo.domain} ke kaam dikhaye ja rahe hain`
+              : "AI ne automatically assign kiya"}
           </p>
         </div>
 
@@ -326,7 +303,9 @@ export default function ProviderJobs() {
             <div>
               <p className="font-bold text-sm">Autonomous Matching Active</p>
               <p className="text-xs text-brand-100 mt-0.5">
-                Cancel ke baad AI turant next best ustaad select karta hai aur customer ko notify karta hai
+                {providerInfo?.domain
+                  ? `Sirf ${providerInfo.domain} domain ke jobs assign hote hain`
+                  : "Cancel ke baad AI turant next best ustaad select karta hai"}
               </p>
             </div>
           </div>
@@ -349,6 +328,24 @@ export default function ProviderJobs() {
             </button>
           ))}
         </div>
+
+        {/* Empty State */}
+        {displayJobs.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-16 text-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-stone-100 mb-4">
+              <Inbox size={28} className="text-ink-faint" />
+            </div>
+            <p className="font-bold text-ink text-base">Koi job nahi hai</p>
+            <p className="text-sm text-ink-muted mt-1">
+              {providerInfo?.domain
+                ? `Abhi ${providerInfo.domain} ke koi kaam nahi hain`
+                : "Jab customers booking karenge, yahan dikhenge"}
+            </p>
+            <p className="text-xs text-ink-faint mt-3">
+              Naye provider ke liye jobs tab aayenge jab customer aapki category mein booking karein
+            </p>
+          </div>
+        )}
 
         {/* Jobs List */}
         <div className="space-y-3">
@@ -374,6 +371,13 @@ export default function ProviderJobs() {
                 {/* Service & Customer */}
                 <p className="font-bold text-ink text-base">{j.service}</p>
                 <p className="text-sm text-ink-muted mt-0.5">Customer: {j.customer}</p>
+
+                {/* Domain badge */}
+                {j.domain && (
+                  <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-accent-50 border border-accent-200 px-2 py-0.5 text-[10px] font-bold text-accent-700">
+                    {j.domain}
+                  </span>
+                )}
 
                 {/* Details */}
                 <div className="mt-3 flex flex-wrap gap-2 text-xs">
@@ -430,7 +434,7 @@ export default function ProviderJobs() {
                 )}
 
                 {j.status === "re-assigning" && (
-                  <ReAssigningOverlay job={j} />
+                  <ReAssigningOverlay />
                 )}
 
                 {j.status === "cancelled" && (
@@ -441,7 +445,7 @@ export default function ProviderJobs() {
                       </div>
                     )}
                     {j.reAssignedTo ? (
-                      <ReAssignedResult provider={j.reAssignedTo} />
+                      <ReAssignedResult provider={j.reAssignedTo as ProviderPool} />
                     ) : (
                       <div className="rounded-xl bg-stone-50 border border-stone-200 px-3 py-2 text-xs text-ink-muted">
                         ⚠️ Koi available ustaad nahi mila

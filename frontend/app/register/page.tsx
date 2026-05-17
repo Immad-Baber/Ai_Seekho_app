@@ -3,7 +3,7 @@ import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
-import { saveUser } from "@/lib/auth";
+import { saveUser, registerProvider, registerCustomer } from "@/lib/auth";
 import {
   User, Phone, CreditCard, MapPin, Wrench, Clock,
   FileText, Camera, Image as GalleryIcon, Eye, EyeOff, ArrowLeft, CheckCircle2,
@@ -130,7 +130,7 @@ function RegisterForm() {
     if (!validate()) return;
     setLoading(true);
     setTimeout(() => {
-      saveUser({
+      const userData = {
         name: form.name.trim(),
         phone: form.phone.trim(),
         cnic: form.cnic.trim(),
@@ -139,7 +139,14 @@ function RegisterForm() {
         domain: form.domain,
         experience: form.experience,
         bio: form.bio,
-      });
+      };
+      saveUser(userData);
+      // Register in the global registry for matching
+      if (isProvider) {
+        registerProvider(userData);
+      } else {
+        registerCustomer(userData);
+      }
       router.push(isProvider ? "/provider" : "/");
     }, 1200);
   };
