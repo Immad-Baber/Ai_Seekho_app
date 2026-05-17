@@ -3,12 +3,15 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Mic, Send, ChevronRight, MapPin, Shield, Clock, Sparkles, UserCircle } from "lucide-react";
+import {
+  Mic, Send, ChevronRight, MapPin, Shield, Clock, Sparkles,
+  UserCircle, CheckCircle2, Bot, Zap, BarChart2,
+} from "lucide-react";
 import { orchestrate, runDemo, type OrchestrationResult } from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandLogo } from "@/components/BrandLogo";
 import { ServiceCategories } from "@/components/ServiceCategories";
-import { getUser } from "@/lib/auth";
+import { getUser, saveBooking, addNotification } from "@/lib/auth";
 
 const QUICK = [
   { text: "Mujhe kal subah AC service chahiye G-13", label: "AC" },
@@ -28,6 +31,17 @@ const TRUST = [
   { icon: MapPin, text: "Apke area mein" },
 ];
 
+// AI reasoning steps shown while booking is being auto-confirmed
+const AI_STEPS = [
+  "Problem samajh aa gaya...",
+  "Best ustaad dhundh raha hai...",
+  "8 factors se score kar raha hai...",
+  "Qeemat calculate ho rahi hai...",
+  "Ustaad ko assign kar raha hai...",
+  "Booking confirm kar raha hai...",
+  "Notification bhej raha hai...",
+];
+
 export default function HomePage() {
   const router = useRouter();
   const [message, setMessage]   = useState("");
@@ -37,15 +51,40 @@ export default function HomePage() {
   const [showDemos, setShowDemos] = useState(false);
   const [mounted, setMounted]   = useState(false);
   const [userName, setUserName] = useState("");
+  const [aiStep, setAiStep]     = useState(0);
+  const [autoBooked, setAutoBooked] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     const u = getUser();
     if (!u) { router.push("/select-role"); return; }
-    // Providers go to their own dashboard
     if (u.role === "provider") { router.push("/provider"); return; }
     setUserName(u.name.split(" ")[0]);
   }, [router]);
+
+  // Auto-save booking once result arrives
+  useEffect(() => {
+    if (!result || autoBooked) return;
+    const user = getUser();
+    if (!user) return;
+
+    const bookingId = result.booking_id || `BK-${Date.now()}`;
+    saveBooking(user.phone, {
+      id: bookingId,
+      booking_id: bookingId,
+      provider_name: result.selected_provider?.name || "Ustaad",
+      service_type: result.intent?.service_type || "Service",
+      status: "confirmed",
+      total_price: result.pricing?.total || 0,
+      created_at: new Date().toISOString(),
+      schedule_start: result.schedule?.start,
+    });
+    addNotification(user.phone, {
+      title: "✅ Booking Confirm Ho Gayi!",
+      body: `${result.selected_provider?.name || "Ustaad"} aapke pass aa raha hai. Booking ID: ${bookingId}`,
+    });
+    setAutoBooked(true);
+  }, [result, autoBooked]);
 
   async function submit(text?: string) {
     const msg = text || message;
@@ -53,11 +92,26 @@ export default function HomePage() {
     setMessage(msg);
     setLoading(true);
     setError("");
+    setResult(null);
+    setAutoBooked(false);
+    setAiStep(0);
+
+    // Animate AI reasoning steps
+    let stepIdx = 0;
+    const stepInterval = setInterval(() => {
+      stepIdx++;
+      if (stepIdx < AI_STEPS.length) setAiStep(stepIdx);
+      else clearInterval(stepInterval);
+    }, 400);
+
     try {
       const res = await orchestrate(msg);
+      clearInterval(stepInterval);
+      setAiStep(AI_STEPS.length - 1);
       setResult(res);
       sessionStorage.setItem("lastOrchestration", JSON.stringify(res));
     } catch {
+      clearInterval(stepInterval);
       setError("Server se connect nahi ho raha. Backend start karein (port 8080).");
     } finally {
       setLoading(false);
@@ -68,7 +122,7 @@ export default function HomePage() {
 
   return (
     <main className="flex min-h-screen flex-col px-4 pt-5 pb-6">
-      {/* Header with greeting and profile link */}
+      {/* Header */}
       <header className="mb-5 flex items-start justify-between">
         <div>
           <BrandLogo size="md" showTagline />
@@ -90,6 +144,7 @@ export default function HomePage() {
         </Link>
       </header>
 
+      {/* Input Card */}
       <section className="card-elevated mb-5 overflow-hidden p-0">
         <div className="bg-gradient-to-r from-brand-600 to-brand-700 px-4 py-3 text-white">
           <p className="text-sm font-semibold">Kya kaam karwana hai?</p>
@@ -121,48 +176,101 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mb-5">
-        <p className="section-title mb-3">Service choose karein</p>
-        <ServiceCategories onSelect={(p) => submit(p)} />
-      </section>
+      {/* AI Reasoning Steps — shown while loading */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mb-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 p-4 text-white"
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <Bot size={16} className="animate-pulse" />
+              <p className="font-bold text-sm">AI Agent kaam kar raha hai...</p>
+            </div>
+            <div className="space-y-1.5">
+              {AI_STEPS.map((step, i) => (
+                <div key={step} className={`flex items-center gap-2 text-xs transition-all duration-300 ${i <= aiStep ? "opacity-100" : "opacity-30"}`}>
+                  {i < aiStep ? (
+                    <CheckCircle2 size={12} className="text-green-300 shrink-0" />
+                  ) : i === aiStep ? (
+                    <div className="h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin shrink-0" />
+                  ) : (
+                    <div className="h-3 w-3 rounded-full border border-white/40 shrink-0" />
+                  )}
+                  <span className={i <= aiStep ? "text-white font-medium" : "text-brand-100"}>{step}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <section className="mb-5">
-        <p className="section-title mb-2">Jaldi examples</p>
-        <div className="flex flex-col gap-2">
-          {QUICK.map(({ text, label }) => (
-            <button key={text} type="button" onClick={() => submit(text)} disabled={loading}
-              className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]">
-              <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">{label}</span>
-              <span className="flex-1 text-sm font-medium text-ink leading-snug">{text}</span>
-              <ChevronRight size={16} className="shrink-0 text-ink-faint" />
-            </button>
-          ))}
-        </div>
-      </section>
+      {!loading && !result && (
+        <>
+          <section className="mb-5">
+            <p className="section-title mb-3">Service choose karein</p>
+            <ServiceCategories onSelect={(p) => submit(p)} />
+          </section>
 
-      <button type="button" onClick={() => setShowDemos(!showDemos)}
-        className="text-xs font-medium text-ink-faint underline mb-2">
-        {showDemos ? "Demo hide karein" : "Demo scenarios (testing)"}
-      </button>
-      {showDemos && (
-        <div className="mb-4 grid grid-cols-2 gap-2">
-          {["ac-repair","plumber-urgent","electrician-wiring","beautician-home","tutor-math",
-            "mechanic-car","driver-airport","cleaning-safai","appliance-repair","home-repair",
-            "ambiguous-input","schedule-conflict","no-provider"].map((id) => (
-            <button key={id} type="button"
-              onClick={() => runDemo(id).then((r) => { setResult(r); sessionStorage.setItem("lastOrchestration", JSON.stringify(r)); })}
-              className="chip justify-center text-[10px]">{id}</button>
-          ))}
-        </div>
+          <section className="mb-5">
+            <p className="section-title mb-2">Jaldi examples</p>
+            <div className="flex flex-col gap-2">
+              {QUICK.map(({ text, label }) => (
+                <button key={text} type="button" onClick={() => submit(text)} disabled={loading}
+                  className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]">
+                  <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">{label}</span>
+                  <span className="flex-1 text-sm font-medium text-ink leading-snug">{text}</span>
+                  <ChevronRight size={16} className="shrink-0 text-ink-faint" />
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <button type="button" onClick={() => setShowDemos(!showDemos)}
+            className="text-xs font-medium text-ink-faint underline mb-2">
+            {showDemos ? "Demo hide karein" : "Demo scenarios (testing)"}
+          </button>
+          {showDemos && (
+            <div className="mb-4 grid grid-cols-2 gap-2">
+              {["ac-repair","plumber-urgent","electrician-wiring","beautician-home","tutor-math",
+                "mechanic-car","driver-airport","cleaning-safai","appliance-repair","home-repair",
+                "ambiguous-input","schedule-conflict","no-provider"].map((id) => (
+                <button key={id} type="button"
+                  onClick={() => runDemo(id).then((r) => { setResult(r); sessionStorage.setItem("lastOrchestration", JSON.stringify(r)); })}
+                  className="chip justify-center text-[10px]">{id}</button>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {error && (
         <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
       )}
 
+      {/* Auto-booked result — no manual confirm needed */}
       <AnimatePresence>
-        {result && (
+        {result && !loading && (
           <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
+
+            {/* ✅ Auto-confirm banner */}
+            <div className="rounded-2xl bg-gradient-to-r from-green-500 to-green-600 p-4 text-white">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20">
+                  <Zap size={20} />
+                </div>
+                <div>
+                  <p className="font-bold text-sm">AI ne automatically book kar diya! ✅</p>
+                  <p className="text-xs text-green-100 mt-0.5">
+                    Aapko kuch karne ki zaroorat nahi — ustaad assign ho gaya
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Intent */}
             <div className="card border-l-4 border-l-brand-500 p-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-brand-700">
                 Samajh aa gaya · {result.intent.detected_language}
@@ -183,9 +291,13 @@ export default function HomePage() {
               )}
             </div>
 
+            {/* Provider */}
             {result.selected_provider && (
-              <div className="card-elevated border-2 border-brand-200 bg-brand-50/50 p-4">
-                <p className="text-xs font-semibold text-brand-700">Aapka ustaad</p>
+              <div className="card-elevated border-2 border-green-200 bg-green-50/50 p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <CheckCircle2 size={16} className="text-green-600" />
+                  <p className="text-xs font-semibold text-green-700">Aapka ustaad assign ho gaya</p>
+                </div>
                 <p className="text-xl font-bold text-ink">{result.selected_provider.name}</p>
                 <div className="mt-2 flex flex-wrap gap-2 text-sm">
                   <span className="rounded-full bg-white px-2.5 py-0.5 font-medium text-brand-800">
@@ -196,26 +308,44 @@ export default function HomePage() {
                       PKR {result.pricing.total.toLocaleString()}
                     </span>
                   )}
+                  <span className="rounded-full bg-green-100 px-2.5 py-0.5 font-bold text-green-800 flex items-center gap-1">
+                    <Bot size={11} /> Auto-confirmed
+                  </span>
                 </div>
               </div>
             )}
 
+            {/* Action links */}
             <div className="grid grid-cols-2 gap-2">
               {[
-                { href: "/summary",   label: "Details",    sub: "Poora summary" },
-                { href: "/providers", label: "Ustaad",     sub: "Sab options" },
-                { href: "/pricing",   label: "Qeemat",     sub: "Breakdown" },
-                { href: "/confirm",   label: "Confirm",    sub: "Book karein" },
-                { href: "/reasoning", label: "AI samjhao", sub: "Kyun ye ustaad?" },
-                { href: "/tracking",  label: "Track",      sub: "Live status" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href}
-                  className="card flex flex-col p-3 transition hover:border-brand-300 hover:shadow-card-hover">
-                  <span className="font-semibold text-ink">{link.label}</span>
-                  <span className="text-[11px] text-ink-muted">{link.sub}</span>
-                </Link>
-              ))}
+                { href: "/summary",      label: "Details",    sub: "Poora summary",    icon: BarChart2 },
+                { href: "/providers",    label: "Ustaad",     sub: "Sab options",      icon: UserCircle },
+                { href: "/pricing",      label: "Qeemat",     sub: "Breakdown",        icon: CheckCircle2 },
+                { href: "/reasoning",    label: "AI samjhao", sub: "Kyun ye ustaad?",  icon: Bot },
+                { href: "/tracking",     label: "Track",      sub: "Live status",      icon: MapPin },
+                { href: "/bookings",     label: "Bookings",   sub: "Meri history",     icon: Shield },
+              ].map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link key={link.href} href={link.href}
+                    className="card flex flex-col p-3 transition hover:border-brand-300 hover:shadow-card-hover">
+                    <span className="flex items-center gap-1.5 font-semibold text-ink text-sm">
+                      <Icon size={14} className="text-brand-500" />
+                      {link.label}
+                    </span>
+                    <span className="text-[11px] text-ink-muted mt-0.5">{link.sub}</span>
+                  </Link>
+                );
+              })}
             </div>
+
+            {/* New request button */}
+            <button
+              onClick={() => { setResult(null); setMessage(""); setAutoBooked(false); }}
+              className="w-full rounded-2xl border-2 border-dashed border-stone-300 py-3 text-sm font-semibold text-ink-muted hover:border-brand-400 hover:text-brand-600 transition"
+            >
+              + Naya kaam karwana hai
+            </button>
           </motion.section>
         )}
       </AnimatePresence>

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import {
   Home, CalendarDays, Bell, UserCircle, Plus,
-  Briefcase, DollarSign, Star, type LucideIcon,
+  Briefcase, DollarSign, type LucideIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getUser, type AuthUser } from "@/lib/auth";
@@ -15,19 +15,30 @@ const AUTH_PAGES = ["/select-role", "/login", "/register"];
 
 // Tabs for regular users
 const USER_TABS = [
-  { href: "/",        icon: Home,        labelUr: "Ghar" },
-  { href: "/bookings",icon: CalendarDays,labelUr: "Bookings" },
-  { href: "/notifications", icon: Bell,  labelUr: "Alerts" },
-  { href: "/profile", icon: UserCircle,  labelUr: "Profile" },
+  { href: "/",          icon: Home,        labelUr: "Ghar" },
+  { href: "/bookings",  icon: CalendarDays, labelUr: "Bookings" },
+  { href: "/notifications", icon: Bell,    labelUr: "Alerts" },
+  { href: "/profile",   icon: UserCircle,  labelUr: "Profile" },
 ];
 
 // Tabs for service providers
 const PROVIDER_TABS = [
   { href: "/provider",         icon: Home,        labelUr: "Dashboard" },
   { href: "/provider/jobs",    icon: Briefcase,   labelUr: "Jobs" },
-  { href: "/provider/earnings",icon: DollarSign,  labelUr: "Kamai" },
+  { href: "/provider/earnings", icon: DollarSign, labelUr: "Kamai" },
   { href: "/provider-profile", icon: UserCircle,  labelUr: "Profile" },
 ];
+
+function isTabActive(tabHref: string, currentPath: string): boolean {
+  if (tabHref === "/") {
+    return currentPath === "/";
+  }
+  if (tabHref === "/provider") {
+    // Only match exactly /provider, NOT /provider/jobs etc
+    return currentPath === "/provider";
+  }
+  return currentPath === tabHref || currentPath.startsWith(tabHref + "/") || currentPath.startsWith(tabHref + "?");
+}
 
 export function BottomNav() {
   const path = usePathname();
@@ -49,7 +60,7 @@ export function BottomNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-lg border-t border-stone-200 shadow-nav safe-bottom">
       <div className="mx-auto max-w-lg flex items-end justify-around px-2 pt-2 pb-1">
         {tabs.slice(0, 2).map(({ href, icon: Icon, labelUr }) => {
-          const active = path === href || (href !== "/" && path.startsWith(href));
+          const active = isTabActive(href, path);
           return <NavItem key={href} href={href} active={active} icon={Icon} label={labelUr} isProvider={isProvider} />;
         })}
 
@@ -68,7 +79,7 @@ export function BottomNav() {
         </Link>
 
         {tabs.slice(2).map(({ href, icon: Icon, labelUr }) => {
-          const active = path === href || path.startsWith(href);
+          const active = isTabActive(href, path);
           return <NavItem key={href} href={href} active={active} icon={Icon} label={labelUr} isProvider={isProvider} />;
         })}
       </div>

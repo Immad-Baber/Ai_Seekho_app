@@ -875,5 +875,149 @@
       "confirmed",
       "provider_assigned"
     ]
+  },
+  {
+    "id": "BK-6B6EC8A7",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-18T10:00:00",
+    "scheduled_end": "2026-05-18T12:00:00",
+    "created_at": "2026-05-17T06:54:02.450077",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-D44CA829",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2260.0,
+    "scheduled_start": "2026-05-18T11:30:00",
+    "scheduled_end": "2026-05-18T13:30:00",
+    "created_at": "2026-05-17T06:54:03.369761",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-7F3051C5",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:03:42.028616",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-B48826A7",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:03:43.546792",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-6126F14D",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:04:24.980004",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-CEC809BC",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-plumb-001",
+    "provider_name": "Geyser Master Imran",
+    "service_type": "plumber",
+    "status": "confirmed",
+    "total_price": 2196.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:04:25.954105",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-78F14835",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-mech-001",
+    "provider_name": "AutoCare Tariq",
+    "service_type": "mechanic",
+    "status": "confirmed",
+    "total_price": 2930.0,
+    "scheduled_start": "2026-05-17T09:00:00",
+    "scheduled_end": "2026-05-17T11:00:00",
+    "created_at": "2026-05-17T07:05:20.212344",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-47D8E239",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2594.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:05:32.235645",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
+  },
+  {
+    "id": "BK-21391E02",
+    "user_id": "demo-user-1",
+    "provider_id": "prov-ac-001",
+    "provider_name": "Hassan AC Experts",
+    "service_type": "ac",
+    "status": "confirmed",
+    "total_price": 2594.0,
+    "scheduled_start": "2026-05-17T10:30:00",
+    "scheduled_end": "2026-05-17T12:30:00",
+    "created_at": "2026-05-17T07:05:46.696621",
+    "lifecycle": [
+      "confirmed",
+      "provider_assigned"
+    ]
   }
 ]

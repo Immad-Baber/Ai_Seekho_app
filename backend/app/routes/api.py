@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
@@ -12,6 +13,78 @@ from app.orchestrator.antigravity import orchestrator
 from app.services.data_store import store
 
 router = APIRouter(prefix="/api/v1")
+
+# ── Static demo job pool for provider route page ──────────────────────────────
+_DEMO_TODAY_JOBS = [
+    {
+        "id": "J1",
+        "booking_id": "BK-001",
+        "service": "AC Gas Refill",
+        "service_type": "ac",
+        "customer": "Ali Khan",
+        "customer_phone": "03001234567",
+        "area": "G-13",
+        "location": "G-13/2, Islamabad",
+        "time": "10:00 AM",
+        "pay": 4500,
+        "status": "completed",
+        "eta_minutes": 0,
+        "distance_km": 2.3,
+        "lat": 33.6938,
+        "lng": 73.0652,
+    },
+    {
+        "id": "J2",
+        "booking_id": "BK-002",
+        "service": "Geyser Leak Repair",
+        "service_type": "plumber",
+        "customer": "Fatima Malik",
+        "customer_phone": "03009876543",
+        "area": "G-10",
+        "location": "G-10/4, Islamabad",
+        "time": "11:30 AM",
+        "pay": 2800,
+        "status": "in-progress",
+        "eta_minutes": 12,
+        "distance_km": 4.1,
+        "lat": 33.7007,
+        "lng": 73.0551,
+    },
+    {
+        "id": "J3",
+        "booking_id": "BK-003",
+        "service": "Fan Wiring & Installation",
+        "service_type": "electrician",
+        "customer": "Ahmed Raza",
+        "customer_phone": "03005551234",
+        "area": "F-8",
+        "location": "F-8/3, Islamabad",
+        "time": "2:00 PM",
+        "pay": 2600,
+        "status": "auto-assigned",
+        "eta_minutes": 28,
+        "distance_km": 7.8,
+        "lat": 33.7215,
+        "lng": 73.0479,
+    },
+    {
+        "id": "J4",
+        "booking_id": "BK-004",
+        "service": "Airport Drop",
+        "service_type": "driver",
+        "customer": "Sara Iqbal",
+        "customer_phone": "03007778888",
+        "area": "F-7",
+        "location": "F-7/2, Islamabad",
+        "time": "6:30 PM",
+        "pay": 1800,
+        "status": "auto-assigned",
+        "eta_minutes": 35,
+        "distance_km": 9.4,
+        "lat": 33.7294,
+        "lng": 73.0431,
+    },
+]
 
 
 @router.post("/orchestrate")
