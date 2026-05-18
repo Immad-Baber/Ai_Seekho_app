@@ -1,0 +1,22 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,31)<input class='input-field w-full pl-11  ' id='cnic' placeholder='XXXXX-XXXXXXX-X' />
+[1] (500,102)<label class='mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-muted'>Password />
+[2] (500,158)<input class='input-field w-full  pr-11 ' id='password' placeholder='Min 6 characters' />
+[3] (688,158)<button class='absolute right-4 text-ink-faint hover:text-ink-muted' />
+[4] (500,229)<label class='mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-muted'>Confirm Password />
+[5] (500,285)<input class='input-field w-full  pr-11 ' id='confirmPassword' placeholder='Re-enter password' />
+[6] (688,285)<button class='absolute right-4 text-ink-faint hover:text-ink-muted' />
+[7] (500,356)<label class='mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-muted'>Domain / Service Area />
+[8] (500,410)<select class='input-field w-full' />
+[9] (500,479)<label class='mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-muted'>Years of Experience />
+[10] (500,535)<input class='input-field w-full pl-11  ' id='experience' placeholder='e.g. 5' />
+[11] (500,606)<label class='mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-muted'>Profile Bio / Summary />
+[12] (500,696)<textarea class='input-field w-full resize-none' id='bio' placeholder='Apni skills aur tajurba bataein...' />
+[13] (500,890)<button class='w-full rounded-2xl py-4 text-base font-bold shadow-md transition active:scale-[0.98] disabled:opacity-60 bg-gradient-to-r from-accent-500 to-accent-600 text-white'>Register Now → />
+Already have an account?
+Login karein
+
+</current_dom>

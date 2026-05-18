@@ -1,0 +1,102 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,516)<div  />
+	[1] (382,47)<button class='icon-btn' />
+	❄️ AC Service
+	[2] (618,47)<button class='icon-btn ' />
+	Antigravity کی سمجھ • AI Intent
+	🔧
+	ac
+	📍
+	g-13
+	Confidence:
+	75
+	%
+	[3] (500,269)<div class='filter-row' scrollable='true'>Nearest />
+		[4] (386,269)<button class='filter-chip active'>All />
+		[5] (431,269)<button class='filter-chip '>Morning />
+		[6] (492,269)<button class='filter-chip '>Afternoon />
+		[7] (552,269)<button class='filter-chip '>Evening />
+		[8] (611,269)<button class='filter-chip '>Top Rated />
+		Nearest
+	3
+	professionals found
+	[9] (500,438)<div  />
+		[10] (500,355)<div >🏆 Best Match />
+		[11] (397,438)<div  />
+			[12] (397,396)<div >👷 />
+			[13] (409,505)<div  />
+		[14] (493,438)<div  />
+			[15] (493,375)<div >Zahid Ahmed />
+			[16] (493,400)<div >Inverter AC, Gas Refilling, Cleaning />
+			[17] (493,447)<div  />
+				[18] (437,430)<span >4.9 />
+				[19] (475,430)<span >2.1
+km />
+				[20] (520,430)<span >10 min />
+				[21] (442,464)<span >Reliable />
+			[22] (493,490)<div  />
+				[23] (492,490)<div  />
+			[24] (493,505)<div >99
+% AI Match />
+		[25] (596,438)<div  />
+			[26] (596,415)<div >Rs.
+1500 />
+			[27] (596,436)<div >/ visit />
+			[28] (596,463)<div >available />
+	[29] (500,631)<div  />
+		[30] (397,631)<div  />
+			[31] (397,606)<div >👨‍🔧 />
+			[32] (409,681)<div  />
+		[33] (493,631)<div  />
+			[34] (493,585)<div >Noman Shah />
+			[35] (493,610)<div >Commercial AC, Central Systems />
+			[36] (493,640)<div  />
+				[37] (436,640)<span >4.7 />
+				[38] (475,640)<span >4.5
+km />
+				[39] (521,640)<span >25 min />
+			[40] (493,665)<div  />
+				[41] (474,665)<div  />
+			[42] (493,680)<div >74
+% AI Match />
+		[43] (596,631)<div  />
+			[44] (596,608)<div >Rs.
+2200 />
+			[45] (596,628)<div >/ visit />
+			[46] (596,656)<div >available />
+	[47] (500,806)<div  />
+		[48] (397,806)<div  />
+			[49] (397,781)<div >🧑‍🔧 />
+			[50] (409,856)<div  />
+		[51] (493,806)<div  />
+			[52] (493,761)<div >Irfan Khan />
+			[53] (493,785)<div >General AC Service, Cleaning />
+			[54] (493,815)<div  />
+				[55] (437,815)<span >4.3 />
+				[56] (476,815)<span >0.9
+km />
+				[57] (523,815)<span >20 min />
+			[58] (493,840)<div  />
+				[59] (459,840)<div  />
+			[60] (493,855)<div >52
+% AI Match />
+		[61] (596,806)<div  />
+			[62] (596,783)<div >Rs.
+1100 />
+			[63] (596,804)<div >/ visit />
+			[64] (596,831)<div >available />
+	[65] (388,953)<button class='nav-tab ' />
+		[66] (388,942)<div  />
+		[67] (388,968)<span >Home />
+	Search
+	[68] (444,922)<div  />
+	Bookings
+	Alerts
+	[69] (612,953)<button class='nav-tab ' />
+		[70] (612,942)<div  />
+		[71] (612,968)<span >Profile />
+
+</current_dom>

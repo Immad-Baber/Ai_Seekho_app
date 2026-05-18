@@ -16,6 +16,15 @@ Not a simple marketplace. An **autonomous AI operations platform** that manages 
 - Dispute resolution & reputation management
 - Visible AI reasoning traces
 
+## How it Works (6-Point AI Workflow)
+
+1. **Multilingual Intent Parsing**: The user inputs a problem (e.g., via text or voice) in any language like English, Urdu, or Roman Urdu. The **Intent Agent** translates this and extracts the service category, urgency, and location.
+2. **Dynamic Provider Discovery**: The **Discovery Agent** checks the database to find providers who match the requested category and have active availability, filtering out those who are engaged or mismatched.
+3. **Multi-Factor Provider Ranking**: The **Ranking Agent** scores available providers based on multiple factors: distance, rating, past performance, and reliability, selecting the absolute best match for the job.
+4. **Intelligent Dynamic Pricing**: The **Pricing Agent** calculates a transparent cost structure incorporating base rates, urgency multipliers, and estimated material costs, providing a final clear estimate.
+5. **Automated Booking & Scheduling**: The **Booking Agent** locks in the optimal provider, creates a confirmed booking, prevents schedule conflicts, and notifies both parties simultaneously.
+6. **Continuous Orchestration & Fallback**: The **Antigravity Orchestrator** monitors the entire process in real time. It handles edge cases, such as an ambiguous request (by asking follow-up questions) or provider unavailability, ensuring a seamless fallback.
+
 ## Architecture
 
 ```

@@ -1,0 +1,46 @@
+[0] (361,47)<a class='flex items-center gap-1 text-sm font-medium text-brand-100 hover:text-white transition' href='/'>Back />
+[1] (629,47)<button class='flex items-center gap-1.5 text-sm font-medium text-brand-100 hover:text-white transition'>Save PDF />
+Booking Confirmed
+Thank you for choosing Antigravity
+Receipt
+Confirmed
+BK-7BD7C11E
+5/17/2026, 3:36:25 PM
+Service Details
+Waqas Electric Works
+electrician
+Location
+Islamabad
+Date & Time
+Sun, May 17, 1:30 PM
+AI Decision Summary
+Provider selected based on
+100.22
+% match
+. Ranked #1 for distance (
+3.91
+km), availability, and rating.
+Payment Summary
+Base service fee
+PKR
+1,700
+Travel / distance
+PKR
+313
+Loyalty discount
+PKR
+-101
+Track Provider Live
+[2] (371,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/' />
+	[3] (371,919)<span  />
+	[4] (371,956)<span >Ghar />
+[5] (437,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/bookings'>Bookings />
+	[6] (437,919)<span  />
+	Bookings
+[7] (500,912)<a aria-label='Book a service' class='relative -top-4 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg ring-4 ring-cream-50 transition hover:scale-105 active:scale-95 bg-gradient-to-br from-brand-500 to-brand-700 shadow-brand-600/40' href='/' />
+[8] (563,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/notifications'>Alerts />
+	[9] (563,919)<span  />
+	Alerts
+[10] (629,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/profile' />
+	[11] (629,919)<span  />
+	[12] (629,956)<span >Profile />

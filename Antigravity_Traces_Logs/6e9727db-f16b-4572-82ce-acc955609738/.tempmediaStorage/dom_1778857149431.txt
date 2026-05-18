@@ -1,0 +1,12 @@
+[0] (500,437)<div  />
+	🪪
+	CNIC Verification
+	Ye ek critical app hai — safety ke liye CNIC zaroori hai
+	[1] (500,232)<label class='field-label'>CNIC Number />
+	[2] (500,298)<input class='text-field cnic-field' placeholder='XXXXX-XXXXXXX-X' />
+	[3] (500,366)<label class='field-label'>CNIC Photo (Front Side) />
+	Camera se CNIC ki saaf photo lein
+	[4] (500,662)<button class='photo-retake'>Dobara Lein />
+	Aap ka data encrypted aur safe hai. Sirf verification ke liye use hoga.
+	[5] (402,920)<button class='onboard-back-btn'>← Back />
+	[6] (533,920)<button class='auth-btn'>Agla Step → />

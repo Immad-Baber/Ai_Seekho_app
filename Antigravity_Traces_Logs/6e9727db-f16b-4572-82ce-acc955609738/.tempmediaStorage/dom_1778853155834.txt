@@ -1,0 +1,8 @@
+[0] (500,500)<div  />
+	Antigravity AI
+	[1] (637,48)<div  />
+	Assalam-o-Alaikum! How can I help you today? You can ask in English, Urdu, or Roman Urdu.
+	AC bilkul kaam nahi kar raha, kal subah G-13 mein technician chahiye, budget zyada nahi hai.
+	I couldn't find any available professionals for this service in your area right now.
+	[2] (500,935)<input class='chat-input' placeholder='e.g. AC service chahiye kal subah G-13 mein...' />
+	[3] (624,935)<button class='send-btn' />

@@ -1,0 +1,82 @@
+# Implementation Walkthrough
+
+## Changes Made
+
+### 1. Provider Data Infrastructure (`lib/auth.ts`)
+- Added **ProviderJob** type with `domain` field for job-domain matching
+- Added `getProviderJobs()`, `saveProviderJob()`, `updateProviderJob()` — per-provider job storage
+- Added **ProviderReview** type and `getProviderReviews()`, `saveProviderReview()` — review tracking
+- Added `getProviderStats()` — computes real stats (rating, on-time, completions) from actual data
+- Added **ProviderAvailabilityData** and `getProviderAvailability()`, `saveProviderAvailability()` — persistent availability
+- Added `getAllProviders()`, `registerProvider()` — global provider registry for matching
+- Added `getAllCustomers()`, `registerCustomer()` — global customer registry for matching
+
+### 2. Registration (`register/page.tsx`)
+- Now saves to global provider/customer registry via `registerProvider()` / `registerCustomer()`
+- Enables cross-user matching when customer books a service
+
+### 3. Provider Dashboard (`provider/page.tsx`)
+- **Fixed**: Stats (rating, on-time, today's jobs) now read from `getProviderStats()` instead of hardcoded "4.8", "91%", "3"
+- New providers see "—" for rating and on-time since they have no data
+
+### 4. Provider Profile (`provider-profile/page.tsx`)
+- **Fixed**: Rating and on-time stats now dynamic from `getProviderStats()`
+- Performance Analytics modal now shows real computed metrics
+- New providers see "—" instead of fake "4.8★" and "91%"
+
+### 5. Meri Jobs (`provider/jobs/page.tsx`) — MAJOR FIX
+- **Fixed**: Jobs now loaded from `getProviderJobs()` in localStorage
+- **Fixed**: Jobs filtered by provider's `domain` — only matching-domain jobs appear
+- Removed all hardcoded INITIAL_JOBS
+- Added domain badge on each job card
+- Added empty state for new providers with helpful message
+- Cancel/re-assign flow updates localStorage
+
+### 6. Calendar (`provider/calendar/page.tsx`) — MAJOR FIX
+- **Fixed**: Calendar now generates dates dynamically using `getCalendarGrid(year, month)`
+- Works correctly for any month/year (was hardcoded for May 2026 only with wrong layout)
+- Month navigation (prev/next) actually changes the month
+- Shows jobs from localStorage data on calendar dates
+- Today's date is highlighted correctly
+
+### 7. Availability (`provider/availability/page.tsx`) — MAJOR FIX
+- **Fixed**: All settings now persist to localStorage via `saveProviderAvailability()`
+- Settings load back on page visit
+- "Add area" button actually works (input + submit)
+- Save button shows success confirmation
+
+### 8. Reputation (`provider/reputation/page.tsx`)
+- **Fixed**: All metrics computed from actual data (reviews, jobs)
+- Star distribution from real reviews
+- Trust score calculated from rating + completion rate + on-time rate
+- New providers see empty state: "No Reviews Yet" with helpful text
+
+### 9. Earnings (`provider/earnings/page.tsx`)
+- **Fixed**: Calendar generates dynamically (was hardcoded May 2026 with wrong start day)
+- Earnings data reads from completed jobs in localStorage
+- Weekly/monthly charts based on actual data
+- New providers see empty state
+
+### 10. Agent (`lib/agent.ts`) — MAJOR FIX
+- **Fixed**: Re-assignment agent now filters by domain (was assigning any random provider)
+- Domain detection from job service name using keyword mapping
+- Added more provider domains: Beautician, Tutor, Mechanic, Carpenter, Painter, Driver
+- Includes registered providers from localStorage in matching pool
+
+### 11. Customer-Provider Flow (`page.tsx`) — NEW FEATURE
+- When customer books a service, the system:
+  1. Maps service type to provider domain
+  2. Finds all registered providers matching that domain
+  3. Creates a `ProviderJob` in each matching provider's localStorage
+  4. Sends notification to matching providers
+- This connects the customer booking flow to the provider jobs flow
+
+## How It Works Now
+
+1. **New Provider Registration** → Saved to global registry with domain
+2. **Customer Books Service** → Job created for all matching-domain providers
+3. **Provider Opens "Meri Jobs"** → Sees only jobs matching their domain
+4. **Provider Dashboard** → Shows real stats (0 for new providers)
+5. **Calendar** → Dynamic dates, shows actual job data
+6. **Availability** → Persists all settings
+7. **Reputation** → Shows real reviews/metrics or empty state

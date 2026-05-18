@@ -1,0 +1,71 @@
+[0] (500,631)<div  />
+	[1] (382,25)<button class='icon-btn' />
+	Provider Details
+	99
+	% Match
+	👷
+	Verified
+	Zahid Ahmed
+	Inverter AC, Gas Refilling, Cleaning
+	4.9
+	(
+	312
+	)
+	2.1
+	km away
+	10 min
+	847
+	Jobs Done
+	98
+	%
+	Reliability
+	97
+	%
+	On Time
+	1
+	%
+	Cancel Rate
+	AI Reliability Score
+	✅ Highly Reliable
+	Skills & Specialization
+	Inverter AC
+	Split AC
+	Central AC
+	Gas Refilling
+	8 years
+	experience • Serves:
+	G-13, G-11, G-10
+	Tools & Equipment
+	🛠
+	Vacuum Pump
+	🛠
+	Manifold Gauge
+	🛠
+	Leak Detector
+	Recent Review
+	"Excellent! Fixed my AC in no time." - Kamran A.
+	[2] (424,788)<button class='expand-btn'>AI Matching Rationale />
+	[3] (523,787)<button class='expand-btn'>💰 Price Breakdown />
+	Base Visit Fee
+	Standard provider rate
+	+
+	Rs.
+	1500
+	Total Estimate
+	Rs.
+	1500
+	Provider earns: Rs.
+	1125
+	(fair pay)
+	Time Slot Select Karein
+	Morning
+	9:00 – 12:00 AM
+	Afternoon
+	2:00 – 5:00 PM
+	[4] (395,953)<button class='nav-tab ' />
+		[5] (395,968)<span >Home />
+	Search
+	[6] (465,922)<div  />
+	Bookings
+	[7] (605,953)<button class='nav-tab ' />
+		[8] (605,968)<span >Profile />

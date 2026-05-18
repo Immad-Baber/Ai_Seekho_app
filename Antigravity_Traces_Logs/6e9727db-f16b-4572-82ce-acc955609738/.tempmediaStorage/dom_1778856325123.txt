@@ -1,0 +1,38 @@
+[0] (500,500)<div  />
+	Aap kaun hain?
+	Select your role to continue
+	[1] (500,170)<label class='field-label'>Apna naam likhein />
+	[2] (500,216)<input class='text-field' placeholder='e.g. Ahmed Khan' />
+	[3] (500,399)<div  />
+		[4] (500,343)<div  />
+			[5] (193,343)<div >🏠 />
+			[6] (339,343)<div  />
+				[7] (339,333)<div >Customer />
+				[8] (339,355)<div >صارف />
+			[9] (829,343)<div  />
+		[10] (500,393)<p >Find and book trusted professionals for home services. />
+		[11] (500,449)<div  />
+			[12] (500,425)<div >✓
+Browse 2400+ providers />
+			[13] (500,449)<div >✓
+AI-powered matching />
+			[14] (500,473)<div >✓
+Transparent pricing />
+	[15] (500,642)<div  />
+		[16] (500,574)<div  />
+			[17] (193,574)<div >👷 />
+			[18] (391,574)<div  />
+				[19] (391,564)<div >Service Provider />
+				[20] (391,586)<div >پیشہ ور />
+			[21] (829,574)<div  />
+		[22] (500,636)<p >Get more customers, manage bookings, and grow your business. />
+		[23] (500,704)<div  />
+			[24] (500,680)<div >✓
+Receive job requests />
+			[25] (500,704)<div >✓
+Smart scheduling />
+			[26] (500,728)<div >✓
+Fair earning opportunities />
+	Continue as
+	...
+	→

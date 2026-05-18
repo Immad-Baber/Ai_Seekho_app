@@ -1,0 +1,6 @@
+- `[x]` 1. Create `frontend/app/receipt/page.tsx`
+- `[x]` 2. Modify `frontend/app/page.tsx` (add receipt link, schedule notifications)
+- `[x]` 3. Modify `frontend/app/tracking/page.tsx` (completion flow)
+- `[x]` 4. Modify `frontend/app/bookings/page.tsx` (rate/feedback link)
+- `[x]` 5. Modify `frontend/app/reasoning/page.tsx` (enhanced UI)
+- `[x]` 6. Modify `backend/app/agents/notification_agent.py` (follow-up trace entries)

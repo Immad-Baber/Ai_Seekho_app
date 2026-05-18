@@ -1,0 +1,56 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+Ustaad
+PK
+Sahi ustaad, seedha kaam
+Assalam-o-Alaikum,
+Amir
+👋
+Verified ustaad
+On-time guarantee
+Apke area mein
+[0] (712,57)<a class='flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-brand-100 text-brand-700 hover:bg-brand-200 transition' href='/profile' />
+Kya kaam karwana hai?
+Urdu, Roman Urdu ya English — jo marzi likhein
+[1] (500,391)<textarea class='input-field min-h-[88px] resize-none text-base' placeholder='Masalan: Kal subah G-13 mein plumber, electrician ya safai service chahiye...' />
+[2] (377,517)<a class='btn-secondary flex-1 py-2.5' href='/voice'>Bol kar batao />
+[3] (596,517)<button class='btn-primary flex-[1.4] py-2.5'>Ustaad dhundo />
+Service choose karein
+[4] (323,704)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[5] (323,690)<span  />
+	[6] (323,737)<span >AC />
+[7] (441,704)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[8] (441,690)<span  />
+	[9] (441,737)<span >Plumber />
+[10] (559,704)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[11] (559,690)<span  />
+	[12] (559,737)<span >Bijli />
+[13] (677,704)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[14] (677,690)<span  />
+	[15] (677,737)<span >Beauty />
+[16] (323,831)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[17] (323,817)<span  />
+	[18] (323,864)<span >Tutor />
+[19] (441,831)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover'>Gari />
+	[20] (441,817)<span  />
+	Gari
+[21] (559,831)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover'>Safai />
+	[22] (559,817)<span  />
+	Safai
+[23] (677,831)<button class='flex flex-col items-center gap-1.5 rounded-2xl p-2.5 transition active:scale-95 card hover:shadow-card-hover' />
+	[24] (677,817)<span  />
+	[25] (677,864)<span >Machine />
+Mistri
+Driver
+[26] (309,928)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-brand-700' href='/' />
+	[27] (309,916)<span  />
+	[28] (309,955)<span >Ghar />
+Bookings
+Alerts
+[29] (691,928)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/profile' />
+	[30] (691,916)<span  />
+	[31] (691,955)<span >Profile />
+
+</current_dom>

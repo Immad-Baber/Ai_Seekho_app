@@ -281,14 +281,14 @@ export default function HomePage() {
         <>
           <section className="mb-5">
             <p className="section-title mb-3">Service choose karein</p>
-            <ServiceCategories onSelect={(p) => submit(p)} />
+            <ServiceCategories onSelect={(p) => setMessage(p)} />
           </section>
 
           <section className="mb-5">
             <p className="section-title mb-2">Jaldi examples</p>
             <div className="flex flex-col gap-2">
               {QUICK.map(({ text, label }) => (
-                <button key={text} type="button" onClick={() => submit(text)} disabled={loading}
+                <button key={text} type="button" onClick={() => setMessage(text)} disabled={loading}
                   className="card flex items-center gap-3 p-3 text-left transition hover:border-brand-300 hover:shadow-card-hover active:scale-[0.99]">
                   <span className="min-w-12 rounded-full bg-brand-50 px-2 py-1 text-center text-[11px] font-bold text-brand-800">{label}</span>
                   <span className="flex-1 text-sm font-medium text-ink leading-snug">{text}</span>

@@ -1,0 +1,13 @@
+# Task: Verify Service Orchestrator App
+
+## Plan
+1. [ ] Open `http://localhost:5173/`
+2. [ ] Verify Home Screen (Greeting, Search, Categories, Nearby Providers)
+3. [ ] Click "AC Service" or "Plumbing" category
+4. [ ] Verify Search Results (Match percentages, provider cards)
+5. [ ] Click a provider and verify Detail Screen
+6. [ ] Check for console errors at each step
+7. [ ] Report findings
+
+## Progress
+- Initialized scratchpad

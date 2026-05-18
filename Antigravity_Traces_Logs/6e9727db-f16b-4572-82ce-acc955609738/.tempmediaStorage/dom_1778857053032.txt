@@ -1,0 +1,45 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,572)<div  />
+	Step
+	1
+	of
+	5
+	Aap kaunsi service dete hain?
+	Select your primary service category
+	[1] (443,321)<button class='onboard-cat-btn ' />
+		[2] (443,294)<span >❄️ />
+		[3] (443,346)<span >AC Service />
+		[4] (443,368)<span >اے سی سروس />
+	[5] (557,321)<button class='onboard-cat-btn ' />
+		[6] (557,294)<span >🔧 />
+		[7] (557,346)<span >Plumbing />
+		[8] (557,368)<span >پلمبر />
+	[9] (443,505)<button class='onboard-cat-btn ' />
+		[10] (443,478)<span >⚡ />
+		[11] (443,530)<span >Electrician />
+		[12] (443,552)<span >الیکٹریشن />
+	[13] (557,505)<button class='onboard-cat-btn ' />
+		[14] (557,478)<span >🧹 />
+		[15] (557,530)<span >Cleaning />
+		[16] (557,552)<span >صفائی />
+	[17] (443,689)<button class='onboard-cat-btn ' />
+		[18] (443,663)<span >🔩 />
+		[19] (443,714)<span >Mechanic />
+		[20] (443,737)<span >مکینک />
+	[21] (557,689)<button class='onboard-cat-btn ' />
+		[22] (557,663)<span >📚 />
+		[23] (557,714)<span >Tutor />
+		[24] (557,737)<span >ٹیوٹر />
+	[25] (443,873)<button class='onboard-cat-btn ' />
+		[26] (443,847)<span >🪚 />
+		[27] (443,898)<span >Carpenter />
+		[28] (443,921)<span >بڑھئی />
+	[29] (557,873)<button class='onboard-cat-btn ' />
+		[30] (557,847)<span >🎨 />
+		[31] (557,898)<span >Painter />
+		[32] (557,921)<span >پینٹر />
+
+</current_dom>

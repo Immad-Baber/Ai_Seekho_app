@@ -1,0 +1,42 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (500,643)<div  />
+	[1] (382,47)<button class='icon-btn' />
+	24/7 Helpline
+	🎧
+	Hum yahan madad ke liye hain
+	Agar aap ko kisi customer ya payment ke hawale se problem hai, humari team 24/7 mojud hai.
+	Urgent Help
+	Emergency Support
+	For critical safety issues or severe disputes.
+	[2] (575,473)<button class='helpline-action-btn emergency'>Call Now />
+	General Support
+	Call Helpline
+	Wait time: ~2 mins
+	[3] (569,678)<button class='helpline-action-btn'>0800-12345 />
+	WhatsApp Support
+	Chat with our support agents.
+	[4] (576,784)<button class='helpline-action-btn whatsapp'>Message />
+	Common Questions
+	Paisy kab account mein ayen ge?
+	[5] (388,942)<button class='nav-tab ' />
+		[6] (388,922)<div  />
+		[7] (388,950)<span >Dashboard />
+	[8] (444,942)<button class='nav-tab '>Jobs />
+		[9] (444,922)<div  />
+		Jobs
+	[10] (500,942)<button class='nav-tab active'>Helpline />
+		[11] (500,922)<div  />
+		Helpline
+		[12] (500,899)<div  />
+	[13] (556,942)<button class='nav-tab '>Alerts />
+		[14] (556,931)<div >1 />
+			1
+		Alerts
+	[15] (612,942)<button class='nav-tab ' />
+		[16] (612,922)<div  />
+		[17] (612,950)<span >Profile />
+
+</current_dom>

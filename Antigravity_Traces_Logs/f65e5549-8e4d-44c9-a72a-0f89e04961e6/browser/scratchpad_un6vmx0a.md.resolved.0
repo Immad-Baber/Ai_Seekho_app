@@ -1,0 +1,6 @@
+# Plan
+- Verify current browser page is http://localhost:3000/provider.
+- Take a screenshot of the provider dashboard.
+- Read the DOM to describe everything visible on the page (ratings, jobs, name, etc.).
+- Confirm if it is "Kamran Electrician"'s dashboard.
+- Provide a summary of the actions and findings.

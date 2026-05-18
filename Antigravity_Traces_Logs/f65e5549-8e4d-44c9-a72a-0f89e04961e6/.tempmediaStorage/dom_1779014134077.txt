@@ -1,0 +1,19 @@
+<current_dom_explanation>
+This is a temporary snapshot of the current page's DOM structure. The DOM will change if you navigate to or interact with another page. Use a tool like browser_get_dom to capture and preserve the DOM in your trajectory if needed for later reference.
+</current_dom_explanation>
+<current_dom>
+[0] (371,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-brand-700' href='/' />
+	[1] (371,919)<span  />
+	[2] (371,956)<span >Ghar />
+[3] (437,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/bookings'>Bookings />
+	[4] (437,919)<span  />
+	Bookings
+[5] (500,912)<a aria-label='Book a service' class='relative -top-4 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg ring-4 ring-cream-50 transition hover:scale-105 active:scale-95 bg-gradient-to-br from-brand-500 to-brand-700 shadow-brand-600/40' href='/' />
+[6] (563,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/notifications'>Alerts />
+	[7] (563,919)<span  />
+	Alerts
+[8] (629,930)<a class='flex min-w-[64px] flex-col items-center gap-0.5 py-1 text-[10px] font-semibold transition text-ink-faint hover:text-ink-muted' href='/profile' />
+	[9] (629,919)<span  />
+	[10] (629,956)<span >Profile />
+
+</current_dom>
