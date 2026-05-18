@@ -1,9 +1,0 @@
-# Task Plan: Testing the Service Marketplace App
-
-- [ ] Resize browser window to mobile width (430px).
-- [ ] Take screenshot of the Home Screen.
-- [ ] Click on "AC Service" category.
-- [ ] Take screenshot of the Search Results screen.
-- [ ] Click on "Zahid Ahmed" (the first provider).
-- [ ] Take screenshot of the Provider Detail screen.
-- [ ] Identify and report any styling or functional issues.
