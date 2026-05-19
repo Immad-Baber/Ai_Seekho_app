@@ -10,7 +10,7 @@ from app.config import get_settings
 class DataStore:
     def __init__(self) -> None:
         self.settings = get_settings()
-        root = Path(__file__).resolve().parents[3]
+        root = Path(__file__).resolve().parents[2]
         self.data_dir = root / "data" / "demo"
         self._cache: dict[str, Any] = {}
 

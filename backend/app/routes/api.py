@@ -147,7 +147,7 @@ async def list_traces(limit: int = Query(50, le=200)):
     from pathlib import Path
     import json
 
-    path = Path(__file__).resolve().parents[3] / "data" / "demo" / "ai_traces.json"
+    path = Path(__file__).resolve().parents[2] / "data" / "demo" / "ai_traces.json"
     if not path.exists():
         return {"traces": []}
     with open(path, encoding="utf-8") as f:

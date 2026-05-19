@@ -52,7 +52,10 @@ export type OrchestrationResult = {
 export async function orchestrate(message: string, userId = "demo-user-1"): Promise<OrchestrationResult> {
   const res = await fetch(`${API}/api/v1/orchestrate`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      "Bypass-Tunnel-Reminder": "true" 
+    },
     body: JSON.stringify({ message, user_id: userId }),
   });
   if (!res.ok) throw new Error("Orchestration failed");
@@ -60,7 +63,10 @@ export async function orchestrate(message: string, userId = "demo-user-1"): Prom
 }
 
 export async function runDemo(scenario: string): Promise<OrchestrationResult> {
-  const res = await fetch(`${API}/api/v1/demo/${scenario}`, { method: "POST" });
+  const res = await fetch(`${API}/api/v1/demo/${scenario}`, { 
+    method: "POST",
+    headers: { "Bypass-Tunnel-Reminder": "true" }
+  });
   if (!res.ok) throw new Error("Demo failed");
   const data = await res.json();
   return data.orchestration ?? data;
@@ -68,24 +74,33 @@ export async function runDemo(scenario: string): Promise<OrchestrationResult> {
 
 export async function getBookings(userId?: string) {
   const q = userId ? `?user_id=${userId}` : "";
-  const res = await fetch(`${API}/api/v1/bookings${q}`);
+  const res = await fetch(`${API}/api/v1/bookings${q}`, {
+    headers: { "Bypass-Tunnel-Reminder": "true" }
+  });
   return res.json();
 }
 
 export async function getTraces(limit = 30) {
-  const res = await fetch(`${API}/api/v1/traces?limit=${limit}`);
+  const res = await fetch(`${API}/api/v1/traces?limit=${limit}`, {
+    headers: { "Bypass-Tunnel-Reminder": "true" }
+  });
   return res.json();
 }
 
 export async function getProviders() {
-  const res = await fetch(`${API}/api/v1/providers`);
+  const res = await fetch(`${API}/api/v1/providers`, {
+    headers: { "Bypass-Tunnel-Reminder": "true" }
+  });
   return res.json();
 }
 
 export async function createDispute(bookingId: string, type: string, description: string) {
   const res = await fetch(`${API}/api/v1/disputes`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { 
+      "Content-Type": "application/json",
+      "Bypass-Tunnel-Reminder": "true"
+    },
     body: JSON.stringify({ booking_id: bookingId, type, description, user_id: "demo-user-1" }),
   });
   return res.json();
@@ -93,7 +108,9 @@ export async function createDispute(bookingId: string, type: string, description
 
 export async function getMapsKey(): Promise<string> {
   try {
-    const res = await fetch(`${API}/api/v1/config/maps-key`);
+    const res = await fetch(`${API}/api/v1/config/maps-key`, {
+      headers: { "Bypass-Tunnel-Reminder": "true" }
+    });
     if (!res.ok) return "";
     const data = await res.json();
     return data.google_maps_api_key || "";
