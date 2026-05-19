@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Ai Seekho</string>
+    <string name="title_activity_main">Ai Seekho</string>
+    <string name="package_name">com.aiseekho.app</string>
+    <string name="custom_url_scheme">com.aiseekho.app</string>
+</resources>

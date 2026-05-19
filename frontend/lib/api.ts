@@ -26,7 +26,7 @@ export type OrchestrationResult = {
     specialization: string[];
     factor_scores: Array<{ factor: string; score: number; weighted: number; note?: string }>;
   }>;
-  selected_provider?: { provider_id: string; name: string; total_score: number };
+  selected_provider?: { provider_id: string; name: string; total_score: number; distance_km?: number; lat?: number; lng?: number };
   pricing?: {
     total: number;
     subtotal: number;
@@ -43,7 +43,7 @@ export type OrchestrationResult = {
   };
   booking_id?: string;
   status: string;
-  traces: Array<{ agent: string; action: string; message: string; confidence?: number; timestamp: string }>;
+  traces: Array<{ agent: string; action: string; message: string; confidence?: number; timestamp: string; details?: any }>;
   workflow_chain: string[];
   fallback_used: boolean;
   edge_case?: string;
