@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, MapPin, Truck, CheckCircle2, Star, MessageSquare } from "lucide-react";
 import { useOrchestration } from "@/hooks/useOrchestration";
 import { getUser, addNotification } from "@/lib/auth";
+import { getMapsKey } from "@/lib/api";
 
 const STEPS = ["confirmed", "provider_assigned", "en_route", "arrived", "in_progress", "completed"];
 
@@ -12,6 +13,13 @@ export default function TrackingPage() {
   const data = useOrchestration();
   const [step, setStep] = useState(2);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [mapsKey, setMapsKey] = useState<string>("");
+
+  useEffect(() => {
+    setUser(getUser());
+    getMapsKey().then(key => setMapsKey(key));
+  }, []);
 
   useEffect(() => {
     // Automatically advance the tracking steps
@@ -46,6 +54,25 @@ export default function TrackingPage() {
     }
   };
 
+  const getEmbedUrl = () => {
+    if (!mapsKey) return "";
+    const provLat = data?.selected_provider?.lat || 33.6821;
+    const provLng = data?.selected_provider?.lng || 73.0451;
+    
+    let dest = "G-13, Islamabad, Pakistan";
+    if (user?.address) {
+      dest = user.address;
+    } else if (data?.intent?.location_text) {
+      dest = data.intent.location_text;
+    }
+    
+    if (!dest.toLowerCase().includes("islamabad")) {
+      dest += ", Islamabad, Pakistan";
+    }
+    
+    return `https://www.google.com/maps/embed/v1/directions?key=${mapsKey}&origin=${provLat},${provLng}&destination=${encodeURIComponent(dest)}&mode=driving`;
+  };
+
   return (
     <main className="flex min-h-screen flex-col bg-stone-50 pb-20">
       <div className="bg-brand-700 text-white px-4 pt-6 pb-12">
@@ -67,6 +94,20 @@ export default function TrackingPage() {
             {step < STEPS.length - 1 ? `ETA ~${data?.matches?.[0]?.eta_minutes || 25} min` : "Service Complete"}
           </p>
         </div>
+
+        {/* Real Google Map */}
+        {mapsKey && (
+          <div className="rounded-2xl bg-white border border-stone-200 overflow-hidden shadow-card mb-4 h-64">
+            <iframe
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              src={getEmbedUrl()}
+            />
+          </div>
+        )}
 
         <div className="card p-4 space-y-3 mb-6">
           {STEPS.map((s, i) => (

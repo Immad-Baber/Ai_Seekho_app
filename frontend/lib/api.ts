@@ -90,3 +90,14 @@ export async function createDispute(bookingId: string, type: string, description
   });
   return res.json();
 }
+
+export async function getMapsKey(): Promise<string> {
+  try {
+    const res = await fetch(`${API}/api/v1/config/maps-key`);
+    if (!res.ok) return "";
+    const data = await res.json();
+    return data.google_maps_api_key || "";
+  } catch {
+    return "";
+  }
+}

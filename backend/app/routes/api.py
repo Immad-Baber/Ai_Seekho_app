@@ -12,7 +12,14 @@ from app.models.schemas import (
 from app.orchestrator.antigravity import orchestrator
 from app.services.data_store import store
 
+from app.config import get_settings
+
 router = APIRouter(prefix="/api/v1")
+
+@router.get("/config/maps-key")
+async def get_maps_key():
+    settings = get_settings()
+    return {"google_maps_api_key": settings.google_maps_api_key}
 
 # ── Static demo job pool for provider route page ──────────────────────────────
 _DEMO_TODAY_JOBS = [

@@ -8,6 +8,7 @@ import {
   AlertTriangle, Zap, Car, Home, Inbox,
 } from "lucide-react";
 import { getUser, getProviderJobs, type AuthUser, type ProviderJob } from "@/lib/auth";
+import { getMapsKey } from "@/lib/api";
 
 interface RouteStop {
   id: number;
@@ -32,8 +33,10 @@ export default function ProviderRoutes() {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [stops, setStops] = useState<RouteStop[]>([]);
   const [activeStop, setActiveStop] = useState<number | null>(null);
+  const [mapsKey, setMapsKey] = useState<string>("");
 
   useEffect(() => {
+    getMapsKey().then(key => setMapsKey(key));
     const u = getUser();
     if (!u || u.role !== "provider") { router.push("/select-role"); return; }
     setUser(u);
@@ -97,6 +100,28 @@ export default function ProviderRoutes() {
 
   // Build route label
   const routeLabel = stops.map((s) => s.location.split(",")[0]).join(" → ");
+
+  const getEmbedUrl = () => {
+    if (!mapsKey || stops.length === 0) return "";
+    const cleanLoc = (loc: string) => {
+      const suffix = loc.toLowerCase().includes("islamabad") ? "" : ", Islamabad, Pakistan";
+      return encodeURIComponent(loc + suffix);
+    };
+
+    if (stops.length === 1) {
+      return `https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=${cleanLoc(stops[0].location)}`;
+    }
+
+    const origin = cleanLoc(stops[0].location);
+    const destination = cleanLoc(stops[stops.length - 1].location);
+    
+    if (stops.length > 2) {
+      const waypoints = stops.slice(1, -1).map(s => cleanLoc(s.location)).join("|");
+      return `https://www.google.com/maps/embed/v1/directions?key=${mapsKey}&origin=${origin}&destination=${destination}&waypoints=${waypoints}&mode=driving`;
+    }
+    
+    return `https://www.google.com/maps/embed/v1/directions?key=${mapsKey}&origin=${origin}&destination=${destination}&mode=driving`;
+  };
 
   return (
     <main className="flex min-h-screen flex-col px-4 pt-6 pb-28">
@@ -164,52 +189,73 @@ export default function ProviderRoutes() {
             </div>
           </div>
 
-          {/* Map Placeholder */}
+          {/* Map Section */}
           <div className="card mb-4 overflow-hidden">
-            <div className="relative h-44 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
-              <div className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: "linear-gradient(#a3a3a3 1px, transparent 1px), linear-gradient(90deg, #a3a3a3 1px, transparent 1px)",
-                  backgroundSize: "32px 32px",
-                }}
-              />
-              {/* Route line simulation */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 176">
-                <path
-                  d={stops.length <= 2
-                    ? "M 80 100 Q 200 60 320 100"
-                    : stops.length <= 3
-                    ? "M 60 140 Q 200 60 340 120"
-                    : "M 60 140 Q 120 80 200 100 Q 280 120 340 40"}
-                  stroke="#059669" strokeWidth="3" fill="none" strokeDasharray="8 4"
+            <div className="relative h-64 bg-stone-100 flex items-center justify-center">
+              {mapsKey ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  src={getEmbedUrl()}
                 />
-                {stops.map((stop, i) => {
-                  const positions = stops.length <= 2
-                    ? [{ cx: 80, cy: 100 }, { cx: 320, cy: 100 }]
-                    : stops.length <= 3
-                    ? [{ cx: 60, cy: 140 }, { cx: 200, cy: 60 }, { cx: 340, cy: 120 }]
-                    : [{ cx: 60, cy: 140 }, { cx: 160, cy: 90 }, { cx: 260, cy: 110 }, { cx: 340, cy: 40 }];
-                  const pos = positions[Math.min(i, positions.length - 1)];
-                  const color = stop.status === "completed" ? "#22c55e" : stop.status === "current" ? "#f59e0b" : "#94a3b8";
-                  return (
-                    <g key={stop.id}>
-                      <circle cx={pos.cx} cy={pos.cy} r="10" fill={color} />
-                      <text x={pos.cx} y={pos.cy + 4} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">
-                        {stop.id}
-                      </text>
-                    </g>
-                  );
-                })}
-              </svg>
-              <p className="text-xs text-ink-muted font-semibold z-10 absolute bottom-3 right-3 bg-white/80 rounded-full px-2 py-0.5">
-                Google Maps (Demo)
-              </p>
+              ) : (
+                <>
+                  <div className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: "linear-gradient(#a3a3a3 1px, transparent 1px), linear-gradient(90deg, #a3a3a3 1px, transparent 1px)",
+                      backgroundSize: "32px 32px",
+                    }}
+                  />
+                  {/* Route line simulation */}
+                  <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 176">
+                    <path
+                      d={stops.length <= 2
+                        ? "M 80 100 Q 200 60 320 100"
+                        : stops.length <= 3
+                        ? "M 60 140 Q 200 60 340 120"
+                        : "M 60 140 Q 120 80 200 100 Q 280 120 340 40"}
+                      stroke="#059669" strokeWidth="3" fill="none" strokeDasharray="8 4"
+                    />
+                    {stops.map((stop, i) => {
+                      const positions = stops.length <= 2
+                        ? [{ cx: 80, cy: 100 }, { cx: 320, cy: 100 }]
+                        : stops.length <= 3
+                        ? [{ cx: 60, cy: 140 }, { cx: 200, cy: 60 }, { cx: 340, cy: 120 }]
+                        : [{ cx: 60, cy: 140 }, { cx: 160, cy: 90 }, { cx: 260, cy: 110 }, { cx: 340, cy: 40 }];
+                      const pos = positions[Math.min(i, positions.length - 1)];
+                      const color = stop.status === "completed" ? "#22c55e" : stop.status === "current" ? "#f59e0b" : "#94a3b8";
+                      return (
+                        <g key={stop.id}>
+                          <circle cx={pos.cx} cy={pos.cy} r="10" fill={color} />
+                          <text x={pos.cx} y={pos.cy + 4} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">
+                            {stop.id}
+                          </text>
+                        </g>
+                      );
+                    })}
+                  </svg>
+                  <p className="text-xs text-ink-muted font-semibold z-10 absolute bottom-3 right-3 bg-white/80 rounded-full px-2 py-0.5">
+                    Google Maps (Demo)
+                  </p>
+                </>
+              )}
             </div>
 
             <div className="p-3 flex items-center gap-2 border-t border-stone-100">
               <Car size={16} className="text-brand-600 shrink-0" />
               <p className="text-xs text-ink-muted flex-1">Current route: <span className="font-semibold text-ink">{routeLabel}</span></p>
-              <button className="text-xs font-bold text-brand-600 flex items-center gap-0.5">
+              <button
+                onClick={() => {
+                  if (stops.length > 0) {
+                    const dest = encodeURIComponent(stops[stops.length - 1].location + ", Islamabad, Pakistan");
+                    window.open(`https://www.google.com/maps/dir/?api=1&destination=${dest}`, "_blank");
+                  }
+                }}
+                className="text-xs font-bold text-brand-600 flex items-center gap-0.5"
+              >
                 Navigate <Navigation size={12} />
               </button>
             </div>

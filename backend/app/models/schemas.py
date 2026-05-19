@@ -71,6 +71,8 @@ class ProviderMatch(BaseModel):
     eta_minutes: Optional[int] = None
     hourly_rate: float = 0
     specialization: list[str] = Field(default_factory=list)
+    lat: Optional[float] = None
+    lng: Optional[float] = None
 
 
 class PricingLineItem(BaseModel):

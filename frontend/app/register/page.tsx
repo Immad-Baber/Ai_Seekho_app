@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
 import { saveUser, registerProvider, registerCustomer } from "@/lib/auth";
+import { getMapsKey } from "@/lib/api";
 import {
   User, Phone, CreditCard, MapPin, Wrench, Clock,
   FileText, Camera, Image as GalleryIcon, Eye, EyeOff, ArrowLeft, CheckCircle2,
@@ -105,11 +106,45 @@ function RegisterForm() {
 
   const detectLocation = () => {
     setLocating(true);
-    // Simulate Google Maps Geolocation API
-    setTimeout(() => {
-      set("address")("G-13/4, Islamabad, Pakistan");
+    if (!navigator.geolocation) {
+      alert("Browser does not support geolocation.");
       setLocating(false);
-    }, 1800);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          const key = await getMapsKey();
+          if (key) {
+            const res = await fetch(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
+            );
+            if (res.ok) {
+              const data = await res.json();
+              if (data.results && data.results[0]) {
+                set("address")(data.results[0].formatted_address);
+                setLocating(false);
+                return;
+              }
+            }
+          }
+          // Fallback if API key missing or geocoding fails
+          set("address")(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+        } catch (err) {
+          console.error("Reverse geocoding failed", err);
+          set("address")(`${latitude.toFixed(6)}, ${longitude.toFixed(6)}`);
+        }
+        setLocating(false);
+      },
+      (error) => {
+        console.error("Geolocation error", error);
+        alert("Location access denied. Please enter address manually.");
+        setLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
   };
 
   const validate = () => {

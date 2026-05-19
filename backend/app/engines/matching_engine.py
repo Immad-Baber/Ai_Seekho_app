@@ -235,6 +235,8 @@ class MatchingEngine:
                 eta_minutes=eta,
                 hourly_rate=rate,
                 specialization=p.get("specializations", []),
+                lat=p.get("lat"),
+                lng=p.get("lng"),
             )
 
             if rejection_reasons and total < 0.55:

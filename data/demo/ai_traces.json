@@ -12928,5 +12928,1254 @@
       }
     ],
     "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-768f0a0106f4",
+    "user_id": "demo-user-1",
+    "message": "Mujhe kal subah AC service chahiye G-13 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:33:51.705466",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 44
+        },
+        "message": "Language: Mixed"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:33:51.705589",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:33:51.707517",
+        "action": "fallback",
+        "confidence": 0.85,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:33:51.707885",
+        "action": "extract_intent",
+        "confidence": 0.85,
+        "details": {
+          "raw_message": "Mujhe kal subah AC service chahiye G-13 mein",
+          "detected_language": "mixed",
+          "service_type": "ac",
+          "service_category": "ac",
+          "urgency": "medium",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.85,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: ac, Urgency: medium, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:33:51.707993",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:33:51.739818",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-ac-001"
+        },
+        "message": "Provider Hassan AC Experts selected: score 102%, ac specialization, ETA 11 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:33:51.740524",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2260.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,260 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:33:51.772821",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-20T10:00:00",
+          "buffer_minutes": 41,
+          "alternates": []
+        },
+        "message": "Slot 10:00 AM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:33:51.783063",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-10650E0B"
+        },
+        "message": "Booking BK-10650E0B confirmed with Hassan AC Experts"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:33:51.783131",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-10650E0B via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:33:51.783168",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-10650E0B"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:33:51.783189",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-10650E0B"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:33:51.783219",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-ac-001",
+          "delta": 0
+        },
+        "message": "Provider Hassan AC Experts trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:33:51.783261",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-7bca60036e73",
+    "user_id": "demo-user-1",
+    "message": "Mujhe kal subah AC service chahiye G-13 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:35:16.678454",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 44
+        },
+        "message": "Language: Mixed"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:35:16.678566",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:35:16.678903",
+        "action": "fallback",
+        "confidence": 0.85,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:35:16.679186",
+        "action": "extract_intent",
+        "confidence": 0.85,
+        "details": {
+          "raw_message": "Mujhe kal subah AC service chahiye G-13 mein",
+          "detected_language": "mixed",
+          "service_type": "ac",
+          "service_category": "ac",
+          "urgency": "medium",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.85,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: ac, Urgency: medium, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:35:16.679320",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:35:16.680882",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-ac-001"
+        },
+        "message": "Provider Hassan AC Experts selected: score 102%, ac specialization, ETA 11 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:35:16.681248",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2260.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,260 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:35:16.682176",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-20T11:30:00",
+          "buffer_minutes": 41,
+          "alternates": [
+            {
+              "start": "2026-05-20T11:30:00",
+              "end": "2026-05-20T13:30:00"
+            },
+            {
+              "start": "2026-05-20T13:00:00",
+              "end": "2026-05-20T15:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 11:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:35:16.702636",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-5BE4CA4E"
+        },
+        "message": "Booking BK-5BE4CA4E confirmed with Hassan AC Experts"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:35:16.702807",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-5BE4CA4E via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:35:16.702860",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-5BE4CA4E"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:35:16.702888",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-5BE4CA4E"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:35:16.702934",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-ac-001",
+          "delta": 0
+        },
+        "message": "Provider Hassan AC Experts trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:35:16.703004",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-e9a31e3c69e8",
+    "user_id": "demo-user-1",
+    "message": "Geyser leak ho raha hai, carpenter chaheya\n",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:48:23.270382",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 43
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:48:23.270486",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:48:23.270758",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:48:23.271023",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Geyser leak ho raha hai, carpenter chaheya",
+          "detected_language": "roman_urdu",
+          "service_type": "plumber",
+          "service_category": "plumber",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: plumber, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:48:23.271115",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:48:23.272576",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-plumb-001"
+        },
+        "message": "Provider Geyser Master Imran selected: score 89%, plumber specialization, ETA 10 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:48:23.272838",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2196.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,196 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:48:23.273310",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-19T12:00:00",
+          "buffer_minutes": 40,
+          "alternates": []
+        },
+        "message": "Slot 12:00 PM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:48:23.295008",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-044A42ED"
+        },
+        "message": "Booking BK-044A42ED confirmed with Geyser Master Imran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:23.295165",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-044A42ED via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:23.295230",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-044A42ED"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:23.295282",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-044A42ED"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:48:23.295353",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-plumb-001",
+          "delta": 0
+        },
+        "message": "Provider Geyser Master Imran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:48:23.295470",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-ca0115f804d2",
+    "user_id": "demo-user-1",
+    "message": "Geyser leak ho raha hai, plumber chahiye",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:48:55.971044",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 40
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:48:55.971091",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:48:55.971276",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:48:55.971409",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Geyser leak ho raha hai, plumber chahiye",
+          "detected_language": "roman_urdu",
+          "service_type": "plumber",
+          "service_category": "plumber",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: plumber, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:48:55.971511",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:48:55.972264",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-plumb-001"
+        },
+        "message": "Provider Geyser Master Imran selected: score 89%, plumber specialization, ETA 10 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:48:55.972447",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2196.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,196 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:48:55.972788",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-19T13:30:00",
+          "buffer_minutes": 40,
+          "alternates": [
+            {
+              "start": "2026-05-19T13:30:00",
+              "end": "2026-05-19T15:30:00"
+            },
+            {
+              "start": "2026-05-19T15:00:00",
+              "end": "2026-05-19T17:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 01:30 PM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:48:55.981835",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-523F5BC4"
+        },
+        "message": "Booking BK-523F5BC4 confirmed with Geyser Master Imran"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:55.981902",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-523F5BC4 via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:55.981921",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-523F5BC4"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:48:55.981932",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-523F5BC4"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:48:55.981949",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-plumb-001",
+          "delta": 0
+        },
+        "message": "Provider Geyser Master Imran trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:48:55.981979",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-a2063c045fbd",
+    "user_id": "demo-user-1",
+    "message": "Electrician chahiye wiring aur fan ke liye",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:49:18.621886",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 42
+        },
+        "message": "Language: Roman Urdu"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:49:18.621938",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:49:18.622050",
+        "action": "fallback",
+        "confidence": 0.75,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:49:18.622141",
+        "action": "extract_intent",
+        "confidence": 0.75,
+        "details": {
+          "raw_message": "Electrician chahiye wiring aur fan ke liye",
+          "detected_language": "roman_urdu",
+          "service_type": "electrician",
+          "service_category": "electrician",
+          "urgency": "medium",
+          "location_text": null,
+          "location_coords": null,
+          "time_preference": null,
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "intermediate",
+          "confidence": 0.75,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: electrician, Urgency: medium, Location: unknown"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:49:18.622180",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.30000000000000004,
+          "flags": [
+            "safety_sensitive_service"
+          ]
+        },
+        "message": "Risk score: 30% \u2014 flags: safety_sensitive_service"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:49:18.622443",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-elec-001"
+        },
+        "message": "Provider Waqas Electric Works selected: score 100%, electrician specialization, ETA 23 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:49:18.622548",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2155.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,155 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:49:18.622697",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-19T12:00:00",
+          "buffer_minutes": 53,
+          "alternates": []
+        },
+        "message": "Slot 12:00 PM assigned"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:49:18.628294",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-4A7FCC59"
+        },
+        "message": "Booking BK-4A7FCC59 confirmed with Waqas Electric Works"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:49:18.628361",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-4A7FCC59 via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:49:18.628388",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-4A7FCC59"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:49:18.628412",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-4A7FCC59"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:49:18.628442",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-elec-001",
+          "delta": 0
+        },
+        "message": "Provider Waqas Electric Works trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:49:18.628485",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-6f08a7f3799d",
+    "user_id": "demo-user-1",
+    "message": "Mujhe kal subah AC service chahiye G-13 mein",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:56:22.771186",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 44
+        },
+        "message": "Language: Mixed"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:56:22.771325",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:56:23.593157",
+        "action": "fallback",
+        "confidence": 0.85,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:56:23.594571",
+        "action": "extract_intent",
+        "confidence": 0.85,
+        "details": {
+          "raw_message": "Mujhe kal subah AC service chahiye G-13 mein",
+          "detected_language": "mixed",
+          "service_type": "ac",
+          "service_category": "ac",
+          "urgency": "medium",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.85,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: ac, Urgency: medium, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:56:23.594723",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:56:27.791678",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-ac-001"
+        },
+        "message": "Provider Hassan AC Experts selected: score 102%, ac specialization, ETA 11 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:56:27.791919",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2260.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,260 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:56:27.794884",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-20T11:30:00",
+          "buffer_minutes": 41,
+          "alternates": [
+            {
+              "start": "2026-05-20T11:30:00",
+              "end": "2026-05-20T13:30:00"
+            },
+            {
+              "start": "2026-05-20T13:00:00",
+              "end": "2026-05-20T15:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 11:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:56:27.809517",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-8F696449"
+        },
+        "message": "Booking BK-8F696449 confirmed with Hassan AC Experts"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:27.809588",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-8F696449 via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:27.809615",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-8F696449"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:27.809636",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-8F696449"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:56:27.809667",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-ac-001",
+          "delta": 0
+        },
+        "message": "Provider Hassan AC Experts trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:56:27.809716",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
+  },
+  {
+    "trace_id": "TRC-81fc22e4d3c7",
+    "user_id": "demo-user-1",
+    "message": "Mujhe kal subah AC service chahiye G-13",
+    "traces": [
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:56:31.968441",
+        "action": "detect_language",
+        "confidence": 0.92,
+        "details": {
+          "raw_length": 39
+        },
+        "message": "Language: Mixed"
+      },
+      {
+        "agent": "Language Parsing Agent",
+        "timestamp": "2026-05-19 10:56:31.968497",
+        "action": "normalize",
+        "confidence": null,
+        "details": {
+          "script": "latin"
+        },
+        "message": "Code-switching detected \u2014 routing to multilingual intent pipeline"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:56:34.585805",
+        "action": "fallback",
+        "confidence": 0.85,
+        "details": {},
+        "message": "Gemini unavailable \u2014 rule-based intent parser engaged"
+      },
+      {
+        "agent": "Intent Understanding Agent",
+        "timestamp": "2026-05-19 10:56:34.612803",
+        "action": "extract_intent",
+        "confidence": 0.85,
+        "details": {
+          "raw_message": "Mujhe kal subah AC service chahiye G-13",
+          "detected_language": "mixed",
+          "service_type": "ac",
+          "service_category": "ac",
+          "urgency": "medium",
+          "location_text": "G-13",
+          "location_coords": null,
+          "time_preference": "tomorrow morning",
+          "budget_sensitivity": "medium",
+          "issue_severity": "medium",
+          "constraints": [],
+          "user_preferences": [],
+          "complexity": "basic",
+          "confidence": 0.85,
+          "needs_clarification": false,
+          "clarification_questions": []
+        },
+        "message": "Service: ac, Urgency: medium, Location: G-13"
+      },
+      {
+        "agent": "Risk Assessment Agent",
+        "timestamp": "2026-05-19 10:56:34.612922",
+        "action": "assess_risk",
+        "confidence": 0.88,
+        "details": {
+          "risk_score": 0.2,
+          "flags": []
+        },
+        "message": "Risk score: 20% \u2014 flags: none"
+      },
+      {
+        "agent": "Provider Matching Agent",
+        "timestamp": "2026-05-19 10:56:38.294794",
+        "action": "select",
+        "confidence": 0.91,
+        "details": {
+          "provider_id": "prov-ac-001"
+        },
+        "message": "Provider Hassan AC Experts selected: score 102%, ac specialization, ETA 11 min"
+      },
+      {
+        "agent": "Dynamic Pricing Agent",
+        "timestamp": "2026-05-19 10:56:38.295100",
+        "action": "calculate_price",
+        "confidence": 0.94,
+        "details": {
+          "total": 2260.0,
+          "surge": false
+        },
+        "message": "Total PKR 2,260 \u2014 urgency: standard"
+      },
+      {
+        "agent": "Scheduling Agent",
+        "timestamp": "2026-05-19 10:56:38.295549",
+        "action": "assign_slot",
+        "confidence": 0.89,
+        "details": {
+          "start": "2026-05-20T11:30:00",
+          "buffer_minutes": 41,
+          "alternates": [
+            {
+              "start": "2026-05-20T11:30:00",
+              "end": "2026-05-20T13:30:00"
+            },
+            {
+              "start": "2026-05-20T13:00:00",
+              "end": "2026-05-20T15:00:00"
+            }
+          ]
+        },
+        "message": "10AM conflict detected \u2014 11:30 AM assigned (alternate)"
+      },
+      {
+        "agent": "Booking Agent",
+        "timestamp": "2026-05-19 10:56:38.307376",
+        "action": "create_booking",
+        "confidence": 0.97,
+        "details": {
+          "booking_id": "BK-22645752"
+        },
+        "message": "Booking BK-22645752 confirmed with Hassan AC Experts"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:38.307528",
+        "action": "notify_confirmation",
+        "confidence": null,
+        "details": {
+          "channels": [
+            "FCM push"
+          ],
+          "type": "immediate"
+        },
+        "message": "Booking confirmation sent for BK-22645752 via FCM push"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:38.307573",
+        "action": "schedule_reminders",
+        "confidence": null,
+        "details": {
+          "reminder_times": [
+            "-1h",
+            "en_route",
+            "arrived"
+          ]
+        },
+        "message": "Follow-up reminders scheduled for BK-22645752"
+      },
+      {
+        "agent": "Notification Agent",
+        "timestamp": "2026-05-19 10:56:38.307603",
+        "action": "schedule_completion",
+        "confidence": null,
+        "details": {
+          "trigger": "status == completed"
+        },
+        "message": "Post-service feedback prompt scheduled for BK-22645752"
+      },
+      {
+        "agent": "Reputation Agent",
+        "timestamp": "2026-05-19 10:56:38.307721",
+        "action": "snapshot",
+        "confidence": null,
+        "details": {
+          "provider_id": "prov-ac-001",
+          "delta": 0
+        },
+        "message": "Provider Hassan AC Experts trust score updated in analytics pipeline"
+      },
+      {
+        "agent": "Workflow Orchestrator Agent",
+        "timestamp": "2026-05-19 10:56:38.307796",
+        "action": "complete",
+        "confidence": null,
+        "details": {
+          "steps": 13
+        },
+        "message": "Workflow chain executed: antigravity_start \u2192 Language Parsing Agent \u2192 Intent Understanding Agent \u2192 Risk Assessment Agent \u2192 Provider Matching Agent \u2192 Dynamic Pricing Agent \u2192 Scheduling Agent \u2192 Booking Agent \u2192 Notification Agent \u2192 Reputation Agent \u2192 Escalation Agent \u2192 Workflow Orchestrator Agent \u2192 antigravity_pipeline_complete"
+      }
+    ],
+    "status": "confirmed"
   }
 ]
